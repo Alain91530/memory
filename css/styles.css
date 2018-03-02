@@ -18,22 +18,22 @@ main {
 .card {
   background-color: orange;
   border-radius: 10px;
-  box-shadow: 15px grey;
   display: flex;
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
 }
 #deck {
   align-self: center;
   align-items: center;
+  background-image: linear-gradient(270deg, lightblue 0%, blue 100%);
   border-radius: 8px;
+  box-shadow: 15px 15px 3px grey;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 600px;
-  min-heigth: 600px;
   padding: 30px;
-  background-image: linear-gradient(270deg, lightblue 0%, blue 100%);
   margin: auto;
+  min-height: 600px;
+  width: 600px;
   }
