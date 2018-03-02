@@ -9,6 +9,9 @@ body {
 
 header {
   color: white;
+  display: flex;
+  flex-flow: wrap;
+  margin-bottom: 40px;
   text-align: center;
 }
 main {
@@ -37,3 +40,13 @@ main {
   min-height: 600px;
   width: 600px;
   }
+#start-over {
+  width: 50%;
+}
+
+#time-left {
+  width: 50%
+}
+#tittle {
+  width: 100%;
+}
