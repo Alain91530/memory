@@ -51,6 +51,12 @@ main {
   visibility: hidden;
 }
 
+.picture {
+  text-align: center;
+  width: 100%;
+  line-height: 6em;
+}
+
 #deck {
   align-self: center;
   align-items: center;
