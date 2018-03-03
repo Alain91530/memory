@@ -18,6 +18,18 @@ main {
   align-items: center;
   justify-content: center;
 }
+
+.button {
+  background-color: #ff9800;
+  border-color: white;
+  border-radius: 30px;
+  border-style: solid;
+  border-width: thin;
+  line-height: 2.5em;
+  padding: 0.5em;
+  text-decoration: none;
+}
+
 .card {
   background-color: orange;
   background-image: url("../img/card.svg");
@@ -40,14 +52,92 @@ main {
   margin: auto;
   min-height: 600px;
   width: 600px;
-  }
+}
+/************************************************
+
+    Modal box for Rules
+
+    Setup a popup displaying the rules when
+    "How to play" is clicked
+
+*************************************************/
+
+/*  Design of the popUp:
+      - full screen
+      - Fixed position
+      - Black background with transparency
+      - no effect on clicked                    */
+
+.popUp {
+  color: black;
+  cursor: default;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;       /* Put the popup on top */
+	opacity:0;            /* Hide popUp           */
+	transition: opacity 400ms ease-in;
+  text-align: left;
+	pointer-events: none;
+}
+
+/*  Pseudo class to display the popup when link
+    is clicked                                  */
+
+.popUp:target {
+	opacity:1;             /* Display popUp       */
+	pointer-events: auto;  /* click action normal */
+}
+
+/*  Design of the text box                      */
+
+.popUp > div {
+	max-width: 300px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: linear-gradient(#fff, #999);
+}
+
+/*  Create a small round button for the Close
+    link and  place it at a fixed position      */
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	border-radius: 12px;
+	box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover {
+ background: #00d9ff;
+}
+
 #start-over {
-  width: 50%;
+  cursor: pointer;
+  width: 33.33%;
+}
+
+#rules {
+  cursor: pointer;
+  width: 33.33%;
 }
 
 #time-left {
-  width: 50%
+  width: 33.33%
 }
-#tittle {
+#game {
   width: 100%;
 }

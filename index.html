@@ -64,15 +64,39 @@
 <body>
 
   <header>
-    <div id="tittle">
+
+    <div id="game">
       <h1>Memory Game</h1>
     </div>
     <div id="time-left">
       <p>Time left</p>
     </div>
+    <div title="Display the rules" id="rules">
+
+      <!-- Create an anchor to open a popup           -->
+
+      <a class="button" href="#openPopUp">How to play<a>
+
+      <div id="openPopUp" class="popUp">
+        <div>
+
+          <!-- Create an anchor to close the popup           -->
+
+          <a href="#close" title="Close" class="close">X</a>
+          <h2>Rules:</h2>
+          <p>The deck have 8 pairs of cards. Each card show an animal.
+             You have to find all pairs in a limited number of moves.
+          </p>
+          <p>Click on a card to see it's face, then click on a second card.
+              This counts for one move. If the cards have the same animal,
+               they stay face up. Otherwise cards flip back face down.</p>
+          <p>You win when all cards are face up.</p>
+        </div>
+      </div>    </div>
     <div id="start-over">
-      <p>Play<p>
+      <p>Play</p>
     </div>
+
   </header>
 
   <main>
