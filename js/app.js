@@ -9,13 +9,16 @@
 
 let desk = [1, 1, 2 ,2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
 
+const card = document.querySelector('.card');
+const play = document.querySelector('h1');
+
 /*******************************************************************************
 
     Functions
 
 *******************************************************************************/
 
-function shuffleCards(desk) {
+function shuffleCards() {
   for (let position = desk.length-1; position > 0; position--){
     // pick a random position in the desk
     let randomPosition = Math.floor(Math.random()*(position+1));
@@ -26,6 +29,17 @@ function shuffleCards(desk) {
   };
 };
 
+function flipCard() {
+  console.log("card clicked");
+
+};
+
+function startGame() {
+  shuffleCards();
+  console.log(desk);
+}
+
 console.log(desk);
-shuffleCards(desk);
-console.log(desk);
+console.log(card);
+play.addEventListener('click',startGame());
+card.addEventListener('click', flipCard());
