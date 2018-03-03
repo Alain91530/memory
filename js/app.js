@@ -27,19 +27,23 @@ function shuffleCards() {
     desk[position] = desk[randomPosition];
     desk[randomPosition] = saveCard;
   };
-};
+}
 
 function flipCard() {
-  console.log("card clicked");
+  console.log("card clicked"); // debug only
 
-};
+}
 
 function startGame() {
   shuffleCards();
-  console.log(desk);
+  card.onclick = function(){
+    flipCard();
+  };
+  console.log(desk); // debug only
 }
 
-console.log(desk);
-console.log(card);
-play.addEventListener('click',startGame());
-card.addEventListener('click', flipCard());
+play.addEventListener('click', function(){startGame();
+});
+
+/*);
+card.addEventListener('click', flipCard());*/
