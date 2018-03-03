@@ -1,6 +1,7 @@
 @font-face {
 	font-family: "animals";
 	src: url('../fonts/animals.ttf');
+  /* Credit for font www.dafont.com */
 }
 
 body {
@@ -36,8 +37,7 @@ main {
 }
 
 .card {
-/*  background-color: orange;
-  background-image: url("../img/card.svg"); */
+  color: brown;
   font-family: "animals",sans-serif;
   border-radius: 10px;
   display: flex;
@@ -53,14 +53,14 @@ main {
   background-image: url("../img/card.svg");
   }
 
-.back > p {
+.back > h2 {
   visibility: hidden;
 }
 
 .picture {
+  font-size: 3em;
   text-align: center;
   width: 100%;
-  line-height: 6em;
 }
 
 #deck {
