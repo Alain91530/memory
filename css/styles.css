@@ -60,9 +60,9 @@ main {
 #deck {
   align-self: center;
   align-items: center;
-  background-image: linear-gradient(270deg, lightblue 0%, blue 100%);
+  background-image: linear-gradient(270deg, #BCAAA4, #3e2723 100%);
   border-radius: 8px;
-  box-shadow: 15px 15px 3px grey;
+  box-shadow: 15px 15px 3px #3E2723;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
