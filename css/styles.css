@@ -1,3 +1,8 @@
+@font-face {
+	font-family: "animals";
+	src: url('../fonts/animals.ttf');
+}
+
 body {
   background-image: url("../img/wood.svg");
   /* Credit for background image
@@ -33,6 +38,7 @@ main {
 .card {
 /*  background-color: orange;
   background-image: url("../img/card.svg"); */
+  font-family: "animals",sans-serif;
   border-radius: 10px;
   display: flex;
   width: 125px;
@@ -77,7 +83,9 @@ main {
     Modal box for Rules
 
     Setup a popup displaying the rules when
-    "How to play" is clicked
+    "How to play" is clicked. The popup is made
+    using only html5 and css without any
+    JavaScript.
 
 *************************************************/
 
