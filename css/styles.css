@@ -20,6 +20,7 @@ main {
 }
 .card {
   background-color: orange;
+  background-image: url("../img/card.svg");
   border-radius: 10px;
   display: flex;
   width: 125px;
