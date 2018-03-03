@@ -31,13 +31,26 @@ main {
 }
 
 .card {
-  background-color: orange;
-  background-image: url("../img/card.svg");
+/*  background-color: orange;
+  background-image: url("../img/card.svg"); */
   border-radius: 10px;
   display: flex;
   width: 125px;
   height: 125px;
 }
+
+.front {
+  background-color: orange;
+}
+
+.back {
+  background-image: url("../img/card.svg");
+  }
+
+.back > p {
+  visibility: hidden;
+}
+
 #deck {
   align-self: center;
   align-items: center;
