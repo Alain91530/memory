@@ -28,8 +28,8 @@
 *  Linking to Ubuntu Google font  and font-awesome font.                     *
 *                                                                            *
 ***************************************************************************-->
-<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Ubuntu">
+  <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Ubuntu">
 
 <!--**************************************************************************
 *                                                                            *
@@ -70,50 +70,60 @@
     <div id="game">
       <h1>Memory Game</h1>
     </div>
-    <div id="time-left">
-      <span class="button">
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-      </span>
-    </div>
-    <div title="Display the rules" id="rules">
+  </header>
+    <div id="menu">
+      <div title="Display the rules" id="rules">
 
       <!-- Create an anchor to open a popup           -->
 
-      <a class="button" href="#openPopUp">How to play?</a>
+        <a class="button" href="#openPopUp">How to play?</a>
 
-      <div title="" id="openPopUp" class="popUp">
-        <div>
+        <div title="" id="openPopUp" class="popUp">
+          <div>
 
           <!-- Create an anchor to close the popup           -->
 
-          <a href="#close" title="Close" class="close">X</a>
-          <h2>Rules:</h2>
-          <p>The deck have 8 pairs of cards. Each card show an animal.
-             You have to find all pairs in a limited number of moves.
-          </p>
-          <p>
-            Click on a card to see it's face, then click on a second card.
-              This counts for one move. If the cards match, they stay face
-               up. Otherwise cards flip back face down.
-          </p>
-          <p>A timer shows how long you have been playing. Clicking on the
-             timer pauses the game.
-          </p> 
-          <p>
-            You win when all cards are face up.
-          </p>
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>Rules:</h2>
+            <p>The deck have 8 pairs of cards. Each card show an animal.
+               You have to find all pairs in a limited number of moves.
+            </p>
+            <p>
+              Click on a card to see it's face, then click on a second card.
+                This counts for one move. If the cards match, they stay face
+                 up. Otherwise cards flip back face down.
+            </p>
+            <p>A timer shows how long you have been playing. Clicking on the
+               timer pauses the game.
+            </p>
+            <p>
+              You win when all cards are face up.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-      <div id="start-over">
-        <div>
-        <span title="Start new game" class="button">New game</span>
+        <div id="start-over">
+          <div>
+            <span title="Start new game" class="button">New game</span>
+          </div>
+        </div>
       </div>
+    <div id="score">
+      <div id="stars">
+        <span class="button">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </span>
+      </div>
+      <div id="time">
+        <span clas="button">
+          <p>00:00:00</p>
+        </span>
+      </div>
+
     </div>
 
-  </header>
 
   <main>
     <div id="deck">

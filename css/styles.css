@@ -11,9 +11,12 @@ body {
   /*background-size: cover;*/
   font-family: 'Ubuntu', sans-serif;
   justify-content: center;
+	margin: 0;
 }
 
 header {
+	border-width: 0 0 4px 0;
+	border-style: solid;
   color: #310;
   display: flex;
   flex-flow: wrap;
@@ -78,6 +81,12 @@ main {
   max-width: 100%;
   min-height: 600px;
   width: 600px;
+}
+
+#score {
+	display: flex;
+	flex-flow: wrap;
+	width: 100vm;
 }
 /************************************************
 
