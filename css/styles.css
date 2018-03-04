@@ -5,16 +5,16 @@
 }
 
 body {
-  background-image: url("../img/wood.svg");
+  background-image: url("../img/wood1.jpg");
   /* Credit for background image
      https://pixabay.com/fr/bois-patron-%C3%A9tage-texture-arbre-150384/ */
-  background-size: cover;
+  /*background-size: cover;*/
   font-family: 'Ubuntu', sans-serif;
   justify-content: center;
 }
 
 header {
-  color: white;
+  color: #310;
   display: flex;
   flex-flow: wrap;
   margin-bottom: 40px;
@@ -27,10 +27,10 @@ main {
 
 .button {
   background-color: #ff9800;
-  border-color: white;
+  border-color: #310;
   border-radius: 30px;
   border-style: solid;
-  border-width: thin;
+/*  border-width: thin; */
   line-height: 2.5em;
   padding: 0.5em;
   text-decoration: none;
@@ -75,6 +75,7 @@ main {
   justify-content: space-between;
   padding: 30px;
   margin: auto;
+  max-width: 100%;
   min-height: 600px;
   width: 600px;
 }
@@ -96,7 +97,6 @@ main {
       - no effect on clicked                    */
 
 .popUp {
-  color: black;
   cursor: default;
 	position: fixed;
 	top: 0;
@@ -127,14 +127,14 @@ main {
 	margin: 10% auto;
 	padding: 5px 20px 13px 20px;
 	border-radius: 10px;
-	background: linear-gradient(#fff, #999);
+	background: linear-gradient(#fff, #d9bea6);
 }
 
 /*  Create a small round button for the Close
     link and  place it at a fixed position      */
 
 .close {
-	background: #606061;
+	background: #310;
 	color: #FFFFFF;
 	line-height: 25px;
 	position: absolute;
@@ -149,7 +149,7 @@ main {
 }
 
 .close:hover {
- background: #00d9ff;
+ background: #d9bea6;
 }
 
 #start-over {
