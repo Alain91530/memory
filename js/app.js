@@ -2,14 +2,17 @@
 
     Variables
 
-*******************************************************************************/
-/* this table represent the desk. It's filled with pairs of values representing
+********************************************************************************
+ this table represent the desk. It's filled with pairs of values representing
    the eight pairs of different cards
 *******************************************************************************/
 
-let moves = 0;
 let desk = document.getElementsByClassName('picture');
 let cards = document.getElementsByClassName('card');
+
+const maxMoves = 48;
+const twoStars = 32;
+const oneStar =16;
 
 /*const card = document.querySelector('.card');*/
 const play = document.querySelector('#start-over');
@@ -21,7 +24,7 @@ const play = document.querySelector('#start-over');
 *******************************************************************************/
 
 /*******************************************************************************
-    Shuffle the cards
+    Shuffle the cards (generic algorythm to shuffle a list of objects)
 *******************************************************************************/
 function shuffleCards() {
   for (let card = desk.length-1; card > 0; card--){
@@ -40,7 +43,7 @@ function flipCard(card) {
   card.classList.toggle('front');
   card.classList.toggle('back');
   moves++;
-  console.log(moves); // DEBUG 
+  console.log(moves); // DEBUG
 }
 /*******************************************************************************
   Start the game:
@@ -48,6 +51,7 @@ function flipCard(card) {
     - Wait until a card is clicked
 *******************************************************************************/
 function startGame() {
+  let moves = 0;
   for (let card=0; card<16; card++){
     cards[card].classList.remove('front');
     cards[card].classList.add('back');
