@@ -8,8 +8,9 @@
 *******************************************************************************/
 
 let desk = document.getElementsByClassName('picture');
+let cards = document.getElementsByClassName('card');
 
-const card = document.querySelector('.card');
+/*const card = document.querySelector('.card');*/
 const play = document.querySelector('#start-over');
 
 /*******************************************************************************
@@ -18,6 +19,9 @@ const play = document.querySelector('#start-over');
 
 *******************************************************************************/
 
+/*******************************************************************************
+    Shuffle the cards and put them face back
+*******************************************************************************/
 function shuffleCards() {
   for (let position = desk.length-1; position > 0; position--){
     // pick a random position in the desk
@@ -26,24 +30,39 @@ function shuffleCards() {
     let saveCard = desk[position].textContent;
     desk[position].textContent = desk[randomPosition].textContent;
     desk[randomPosition].textContent = saveCard;
+    cards[position].classList.remove('front');
+    cards[position].classList.add('back');
   };
 }
-
-function flipCard() {
-  card.classList.toggle('front');
-  card.classList.toggle('back');
+/*******************************************************************************
+    Flip the side of a card
+*******************************************************************************/
+function flipCard(c) {
+  c.classList.toggle('front');
+  c.classList.toggle('back');
   console.log("card clicked"); // debug only
 
 }
-
+/*******************************************************************************
+  Start the game:
+    - Shuffle the deck
+    - Wait until a card is clicked
+*******************************************************************************/
 function startGame() {
+
   shuffleCards();
-  card.onclick = function(){
-    flipCard();
-  };
+  for (let card=0; card<16;card++){
+    cards[card].onclick = function(){
+      flipCard(this);
+    };
+  }
   console.log(desk); // debug only
 }
-
+/*******************************************************************************
+  Game is loaded, just wait until player click on new Game
+  This event stay active in order to allow player to abort a game and start a
+  new one.
+*******************************************************************************/
 play.addEventListener('click', function(){startGame();
 });
 
