@@ -25,11 +25,11 @@
 
 <!--**************************************************************************
 *                                                                            *
-*  Linking to Ubuntu Google font                                                       *
+*  Linking to Ubuntu Google font  and font-awesome font.                     *
 *                                                                            *
 ***************************************************************************-->
-
-<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Ubuntu">
 
 <!--**************************************************************************
 *                                                                            *
@@ -71,7 +71,11 @@
       <h1>Memory Game</h1>
     </div>
     <div id="time-left">
-      <p>Time left</p>
+      <span class="button">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+      </span>
     </div>
     <div title="Display the rules" id="rules">
 
@@ -91,9 +95,12 @@
           </p>
           <p>
             Click on a card to see it's face, then click on a second card.
-              This counts for one move. If the cards have the same animal,
-               they stay face up. Otherwise cards flip back face down.
+              This counts for one move. If the cards match, they stay face
+               up. Otherwise cards flip back face down.
           </p>
+          <p>A timer shows how long you have been playing. Clicking on the
+             timer pauses the game.
+          </p> 
           <p>
             You win when all cards are face up.
           </p>
