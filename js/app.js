@@ -30,6 +30,8 @@ function shuffleCards() {
 }
 
 function flipCard() {
+  card.classList.toggle('front');
+  card.classList.toggle('back');
   console.log("card clicked"); // debug only
 
 }
