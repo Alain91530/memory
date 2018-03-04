@@ -7,7 +7,7 @@
    the eight pairs of different cards
 *******************************************************************************/
 
-let desk = [1, 1, 2 ,2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
+let desk = document.getElementsByClassName('picture');
 
 const card = document.querySelector('.card');
 const play = document.querySelector('#start-over');
@@ -23,9 +23,9 @@ function shuffleCards() {
     // pick a random position in the desk
     let randomPosition = Math.floor(Math.random()*(position+1));
     // swap desk[posion] and desk[rendomPosition]
-    let saveCard = desk[position];
-    desk[position] = desk[randomPosition];
-    desk[randomPosition] = saveCard;
+    let saveCard = desk[position].textContent;
+    desk[position].textContent = desk[randomPosition].textContent;
+    desk[randomPosition].textContent = saveCard;
   };
 }
 
