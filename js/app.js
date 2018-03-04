@@ -20,28 +20,24 @@ const play = document.querySelector('#start-over');
 *******************************************************************************/
 
 /*******************************************************************************
-    Shuffle the cards and put them face back
+    Shuffle the cards
 *******************************************************************************/
 function shuffleCards() {
-  for (let position = desk.length-1; position > 0; position--){
+  for (let card = desk.length-1; card > 0; card--){
     // pick a random position in the desk
-    let randomPosition = Math.floor(Math.random()*(position+1));
+    let randomCard = Math.floor(Math.random()*(card+1));
     // swap desk[posion] and desk[rendomPosition]
-    let saveCard = desk[position].textContent;
-    desk[position].textContent = desk[randomPosition].textContent;
-    desk[randomPosition].textContent = saveCard;
-    cards[position].classList.remove('front');
-    cards[position].classList.add('back');
-  };
+    let saveCard = desk[card].textContent;
+    desk[card].textContent = desk[randomCard].textContent;
+    desk[randomCard].textContent = saveCard;
+    };
 }
 /*******************************************************************************
     Flip the side of a card
 *******************************************************************************/
-function flipCard(c) {
-  c.classList.toggle('front');
-  c.classList.toggle('back');
-  console.log("card clicked"); // debug only
-
+function flipCard(card) {
+  card.classList.toggle('front');
+  card.classList.toggle('back');
 }
 /*******************************************************************************
   Start the game:
@@ -49,13 +45,16 @@ function flipCard(c) {
     - Wait until a card is clicked
 *******************************************************************************/
 function startGame() {
-
+  for (let card=0; card<16; card++){
+    cards[card].classList.remove('front');
+    cards[card].classList.add('back');
+  };
   shuffleCards();
   for (let card=0; card<16;card++){
     cards[card].onclick = function(){
       flipCard(this);
     };
-  }
+  };
   console.log(desk); // debug only
 }
 /*******************************************************************************
