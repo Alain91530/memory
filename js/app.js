@@ -7,6 +7,7 @@
    the eight pairs of different cards
 *******************************************************************************/
 
+let moves = 0;
 let desk = document.getElementsByClassName('picture');
 let cards = document.getElementsByClassName('card');
 
@@ -38,6 +39,8 @@ function shuffleCards() {
 function flipCard(card) {
   card.classList.toggle('front');
   card.classList.toggle('back');
+  moves++;
+  console.log(moves); // DEBUG 
 }
 /*******************************************************************************
   Start the game:
