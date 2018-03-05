@@ -7,6 +7,9 @@
    the eight pairs of different cards
 *******************************************************************************/
 
+let timer = 0;
+let timerIntervalId = 0;
+let moves = 0;
 let desk = document.getElementsByClassName('picture');
 let cards = document.getElementsByClassName('card');
 
@@ -23,8 +26,14 @@ const play = document.querySelector('#start-over');
 
 *******************************************************************************/
 
+function changeTimer() {
+  timer++;
+  console.log(timer); // DEBUG only
+}
 /*******************************************************************************
-    Shuffle the cards (generic algorythm to shuffle a list of objects)
+    Shuffle the cards
+
+    Generic algorythm found on internet to shuffle a list of objects)
 *******************************************************************************/
 function shuffleCards() {
   for (let card = desk.length-1; card > 0; card--){
@@ -55,14 +64,18 @@ function startGame() {
   for (let card=0; card<16; card++){
     cards[card].classList.remove('front');
     cards[card].classList.add('back');
-  };
+    };
   shuffleCards();
   for (let card=0; card<16;card++){
     cards[card].onclick = function(){
       flipCard(this);
     };
   };
-  console.log(desk); // debug only
+  timer = 0;
+  if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
+  timerIntervalId = window.setInterval(changeTimer, 1000);
+  console.log(timerIntervalId); // DEBUG only
+  console.log(desk);            // DEBUG only
 }
 /*******************************************************************************
   Game is loaded, just wait until player click on new Game
