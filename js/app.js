@@ -1,23 +1,23 @@
 /*******************************************************************************
 
     Variables
-
-********************************************************************************
- this table represent the desk. It's filled with pairs of values representing
-   the eight pairs of different cards
 *******************************************************************************/
 
 let timer = 0;
 let timerIntervalId = 0;
 let flips = 0;           // A move = 2 flips
+
+/*  Table containing the desk. It's filled with pairs of html elements
+    representing the value of the eight pairs of different cards              */
 let desk = document.getElementsByClassName('picture');
+//  Table containing the comple html elements of the cards of the desk
 let cards = document.getElementsByClassName('card');
 
+// Differents stages of the game set as constants to be easy to change.
 const maxFlips = 48;
 const oneStar = 32;
 const twoStars =16;
 
-/*const card = document.querySelector('.card');*/
 const play = document.querySelector('#start-over');
 
 /*******************************************************************************
@@ -74,7 +74,7 @@ function flipCard(card) {
     - Wait until a card is clicked
 *******************************************************************************/
 function startGame() {
-  let moves = 0;
+  flips = 0;
   for (let card=0; card<16; card++){
     cards[card].classList.remove('front');
     cards[card].classList.add('back');
