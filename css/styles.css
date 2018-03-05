@@ -13,6 +13,7 @@ body {
   background-image: url("../img/wood1.jpg");
   /* Credit for background image
      https://pixabay.com/fr/bois-patron-%C3%A9tage-texture-arbre-150384/ */
+	cursor: default;							 /* always an arrow on non clickable elements */
   font-family: 'Ubuntu', sans-serif;
 	height: 100vh;
 	margin: 0;
@@ -69,11 +70,11 @@ main {
 }
 
 #start-over {
-  cursor: pointer;
+  cursor: pointer;							/* Element is clickable												*/
 }
 
 #rules {
-  cursor: pointer;
+  cursor: pointer;							/* Element is clickable												*/
 }
 
 #time-left {
