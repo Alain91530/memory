@@ -9,13 +9,13 @@
 
 let timer = 0;
 let timerIntervalId = 0;
-let moves = 0;
+let flips = 0;           // A move = 2 flips
 let desk = document.getElementsByClassName('picture');
 let cards = document.getElementsByClassName('card');
 
-const maxMoves = 48;
-const twoStars = 32;
-const oneStar =16;
+const maxFlips = 48;
+const oneStar = 32;
+const twoStars =16;
 
 /*const card = document.querySelector('.card');*/
 const play = document.querySelector('#start-over');
@@ -28,12 +28,10 @@ const play = document.querySelector('#start-over');
 
 function changeTimer() {
   timer++;
-  console.log(timer); // DEBUG only
 }
 /*******************************************************************************
     Shuffle the cards
-
-    Generic algorythm found on internet to shuffle a list of objects)
+    (Generic algorythm found on internet to shuffle a list of objects)
 *******************************************************************************/
 function shuffleCards() {
   for (let card = desk.length-1; card > 0; card--){
@@ -51,8 +49,24 @@ function shuffleCards() {
 function flipCard(card) {
   card.classList.toggle('front');
   card.classList.toggle('back');
-  moves++;
-  console.log(moves); // DEBUG
+  if ((flips++)%2) {
+    console.log("tour ", flips/2);    // DEBUG only
+    switch (flips) {
+      case twoStars: {
+        console.log("Plus que deux étoiles")
+        break;
+      }
+      case oneStar: {
+        console.log("Plus qu'une étoile");
+        break;
+      }
+      case maxFlips: {
+        console.log("Fin du jeu");
+        break;
+      }
+    }
+  };
+  console.log(flips);                 // DEBUG only
 }
 /*******************************************************************************
   Start the game:
@@ -71,10 +85,12 @@ function startGame() {
       flipCard(this);
     };
   };
+  /*
+    Reset the timer if any was running and start a new one
+                                                                              */
   timer = 0;
   if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
   timerIntervalId = window.setInterval(changeTimer, 1000);
-  console.log(timerIntervalId); // DEBUG only
   console.log(desk);            // DEBUG only
 }
 /*******************************************************************************
