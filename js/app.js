@@ -112,6 +112,7 @@ function startGame() {
   };
 
   for (let card=0; card<16; card++){
+    cards[card].classList.remove('matching');
     cards[card].classList.remove('front');
     cards[card].classList.add('back');
     };
