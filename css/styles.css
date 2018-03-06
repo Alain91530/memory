@@ -15,7 +15,6 @@ body {
      https://pixabay.com/fr/bois-patron-%C3%A9tage-texture-arbre-150384/ */
 	cursor: default;							 /* always an arrow on non clickable elements */
   font-family: 'Ubuntu', sans-serif;
-/*	font-size: 1vh; */
 	height: 100vh;
 	margin: 0;
 	display: flex;
@@ -23,11 +22,12 @@ body {
 }
 
 header {
-	border-width: 0 0 0 3px;
+	border-width: 2px;
 	border-style: solid;
   color: #310;
   display: flex;
   flex-flow: wrap;
+	font-size: 3vh;
 	justify-content: center;
 	min-height: 10%;
   text-align: center;
@@ -35,10 +35,8 @@ header {
 	max-width: 25%;
 }
 main {
-/*  align-items: center;*/
 	display: flex;
 	flex-wrap: wrap;
-	height: 89.5vh;
 	justify-content: center;
 	width: 100%;
 }
@@ -56,27 +54,29 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 30px;
+  padding: 3vh;
   margin: auto;
 	/* Square responsive deck			*/
   max-width: 41vw;
   min-height: 41vw;
 }
 #menu {
-	border-style: solid;
-	border-width: 0 4px 0 0;
 	display: flex;
 	flex-flow: wrap;
+	justify-content: center;
 	padding-top: 2%;
-	width: 10%;
-	/* order: 2; */
+	/*width: 10%;
+	order: 2; */
 }
 #score {
+	border-top-style: solid;
+	border-top-width: 2px;
 	display: flex;
 	flex-flow: wrap;
-	height: 10%;
+	height: 20vh;
 	justify-content: center;
-	line-height: 9vh;
+	line-height: 10vh;
+	padding-top: 3vh;
 	width: 100%;
 	/*order: 3; */
 }
@@ -85,11 +85,16 @@ main {
   width: 33.33%
 }
 #game {
+	display: flex;
 	height: 94vh;
+	justify-content: center;
 	margin: 3vh 0 3vh 0;
   width: 74%;
 }
 
+#stars {
+	padding: 0 1vw 0 1vw;
+}
 /*******************************************************************************
 *		Classes																																		 *
 *******************************************************************************/
@@ -98,7 +103,7 @@ main {
   border-color: #310;
   border-radius: 30px;
   border-style: solid;
-/*  border-width: thin; */
+	font-size: 4vh;
   line-height: 2.5em;
   padding: 0.5em;
   text-decoration: none;
@@ -122,6 +127,10 @@ main {
 }
 .front {
   background-color: orange;
+}
+
+#game-title {
+	height: 0;
 }
 
 .back {
@@ -176,7 +185,7 @@ main {
 
 .popUp:target {
 	opacity:1;             /* Display popUp       */
-	pointer-events: auto;  /* click action normal */
+	pointer-events: all;  /* click action normal */
 }
 
 /*  Design of the text box                      */
@@ -235,6 +244,6 @@ main {
 		height: 55px;
 	}
 	.picture {
-		font-size: 2vm;
+		font-size: 2vh;
 	}
 }
