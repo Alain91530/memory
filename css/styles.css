@@ -223,13 +223,11 @@ main {
 
 /*******************************************************************************
 
-		Breakpoints
+		Breakpoint for portrait orientation.
 
 *******************************************************************************/
 
-/*	Narrow screens																														*/
-
-@media screen and (max-width: 500px) {
+@media screen and (orientation: portrait) {
 
 	#desk {
 		width: 75%;
