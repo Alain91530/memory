@@ -1,15 +1,23 @@
 /*******************************************************************************
 
     Variables
-
-*******************************************************************************/
-/* this table represent the desk. It's filled with pairs of values representing
-   the eight pairs of different cards
 *******************************************************************************/
 
-let desk = [1, 1, 2 ,2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
+let timer = 0;
+let timerIntervalId = 0;
+let flips = 0;           // A move = 2 flips
 
-const card = document.querySelector('.card');
+/*  Table containing the desk. It's filled with pairs of html elements
+    representing the value of the eight pairs of different cards              */
+let desk = document.getElementsByClassName('picture');
+//  Table containing the comple html elements of the cards of the desk
+let cards = document.getElementsByClassName('card');
+
+// Differents stages of the game set as constants to be easy to change.
+const maxFlips = 48;
+const oneStar = 32;
+const twoStars =16;
+
 const play = document.querySelector('#start-over');
 
 /*******************************************************************************
@@ -18,30 +26,78 @@ const play = document.querySelector('#start-over');
 
 *******************************************************************************/
 
+function changeTimer() {
+  timer++;
+}
+/*******************************************************************************
+    Shuffle the cards
+    (Generic algorythm found on internet to shuffle a list of objects)
+*******************************************************************************/
 function shuffleCards() {
-  for (let position = desk.length-1; position > 0; position--){
+  for (let card = desk.length-1; card > 0; card--){
     // pick a random position in the desk
-    let randomPosition = Math.floor(Math.random()*(position+1));
+    let randomCard = Math.floor(Math.random()*(card+1));
     // swap desk[posion] and desk[rendomPosition]
-    let saveCard = desk[position];
-    desk[position] = desk[randomPosition];
-    desk[randomPosition] = saveCard;
+    let saveCard = desk[card].textContent;
+    desk[card].textContent = desk[randomCard].textContent;
+    desk[randomCard].textContent = saveCard;
+    };
+}
+/*******************************************************************************
+    Flip the side of a card
+*******************************************************************************/
+function flipCard(card) {
+  card.classList.toggle('front');
+  card.classList.toggle('back');
+  if ((flips++)%2) {
+    console.log("tour ", flips/2);    // DEBUG only
+    switch (flips) {
+      case twoStars: {
+        console.log("Plus que deux étoiles")
+        break;
+      }
+      case oneStar: {
+        console.log("Plus qu'une étoile");
+        break;
+      }
+      case maxFlips: {
+        console.log("Fin du jeu");
+        break;
+      }
+    }
   };
+  console.log(flips);                 // DEBUG only
 }
-
-function flipCard() {
-  console.log("card clicked"); // debug only
-
-}
-
+/*******************************************************************************
+  Start the game:
+    - Shuffle the deck
+    - Wait until a card is clicked
+*******************************************************************************/
 function startGame() {
+  flips = 0;
+  for (let card=0; card<16; card++){
+    cards[card].classList.remove('front');
+    cards[card].classList.add('back');
+    };
   shuffleCards();
-  card.onclick = function(){
-    flipCard();
+  for (let card=0; card<16;card++){
+    cards[card].onclick = function(){
+      flipCard(this);
+    };
   };
-  console.log(desk); // debug only
+  /*
+    Reset the timer if any was running and start a new one
+                                                                              */
+  timer = 0;
+  if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
+  timerIntervalId = window.setInterval(changeTimer, 1000);
+  console.log(desk);            // DEBUG only
 }
-
+/*******************************************************************************
+  Game is loaded, just wait until player click on new Game
+  This event stay active in order to allow player to abort a game and start a
+  new one.
+*******************************************************************************/
 play.addEventListener('click', function(){startGame();
 });
 
