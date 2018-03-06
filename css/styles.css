@@ -13,11 +13,13 @@ body {
   background-image: url("../img/wood1.jpg");
   /* Credit for background image
      https://pixabay.com/fr/bois-patron-%C3%A9tage-texture-arbre-150384/ */
+
 	cursor: default;							 /* always an arrow on non clickable elements */
+
   font-family: 'Ubuntu', sans-serif;
 	height: 100vh;
 	margin: 0;
-	display: flex;
+	display: flex;								 /* flexbox for responsiveness								*/
 	flex-wrap: wrap;
 }
 
@@ -60,14 +62,26 @@ main {
   max-width: 41vw;
   min-height: 41vw;
 }
+
+#game {
+	display: flex;
+	height: 94vh;
+	justify-content: center;
+	margin: 3vh 0 3vh 0;
+  width: 74%;
+}
+
+#game-title {
+	height: 0;
+}
+
 #menu {
 	display: flex;
 	flex-flow: wrap;
 	justify-content: center;
 	padding-top: 2%;
-	/*width: 10%;
-	order: 2; */
 }
+
 #score {
 	border-top-style: solid;
 	border-top-width: 2px;
@@ -78,26 +92,20 @@ main {
 	line-height: 10vh;
 	padding-top: 3vh;
 	width: 100%;
-	/*order: 3; */
 }
 
 #time-left {
   width: 33.33%
 }
-#game {
-	display: flex;
-	height: 94vh;
-	justify-content: center;
-	margin: 3vh 0 3vh 0;
-  width: 74%;
-}
 
 #stars {
 	padding: 0 1vw 0 1vw;
 }
+
 /*******************************************************************************
 *		Classes																																		 *
 *******************************************************************************/
+
 .button {
   background-color: #ff9800;
   border-color: #310;
@@ -125,12 +133,9 @@ main {
 .clickable {
   cursor: pointer;							/* Element is clickable												*/
 }
+
 .front {
   background-color: orange;
-}
-
-#game-title {
-	height: 0;
 }
 
 .back {
@@ -229,41 +234,38 @@ main {
 
 @media screen and (orientation: portrait) {
 
-	#desk {
-		width: 75%;
-	}
-
-#game {
-	height: 50vh;
-	width: 100%;
-}
-
-#game-title {
-	height: 15vh;
-}
-
-#score {
-	height: 10vh;
-}
-
-header{
-	order: 0;
-	max-width: 100%;
-}
-
-.button {
-	line-height: 2.5em;
-}
-
-.menu {
-	order: 3;
-}
 	#deck {
 		width: 265px;
 		height: 265px;
 		max-height: 100%;
 		max-width: 100%;
 		padding: 10px;
+	}
+
+	#game {
+		height: 50vh;
+		width: 100%;
+	}
+
+	#game-title {
+		height: 15vh;
+	}
+
+	#score {
+		height: 10vh;
+	}
+
+	header{
+		order: 0;
+		max-width: 100%;
+	}
+
+	.button {
+		line-height: 2.5em;
+	}
+
+	.menu {
+		order: 3;
 	}
 
 	.card {
