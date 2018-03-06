@@ -146,6 +146,14 @@ main {
   visibility: hidden;
 }
 
+.matching {
+	background-color: lightgreen;
+}
+
+.notMatching {
+	background-color: #faa;
+}
+
 .picture {
   font-size: 5vw;
 	margin-top: 2.5vh;

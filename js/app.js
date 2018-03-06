@@ -14,10 +14,12 @@ let desk = document.getElementsByClassName('picture');
 //  Table containing the complete html elements of the cards of the desk
 let cards = document.getElementsByClassName('card');
 let timerScore = document.getElementById('time');
+let stars=document.getElementsByClassName('fa');
+
 // Differents stages of the game set as constants to be easy to change.
 const maxFlips = 48;
 const oneStar = 32;
-const twoStars =16;
+const twoStars = 16;
 
 const play = document.querySelector('#start-over');
 
@@ -28,7 +30,6 @@ const play = document.querySelector('#start-over');
 *******************************************************************************/
 
 function changeTimer() {
-  timer++;
 /*
     Convert the timer in a string with xx:xx:xx format to change de DOM
                                                                               */
@@ -51,9 +52,7 @@ function changeTimer() {
   if ((secs.length) == 1) {
     secs = "0"+secs;
   };
-  console.log(hrs+mins+secs);   // DEBUG only
-  console.log(timerScore);
-//  timerScore=timerScore.querySelector('span');
+  timer++;
   timerScore.querySelector('span').textContent = hrs+mins+secs;
 }
 /*******************************************************************************
@@ -80,20 +79,24 @@ function flipCard(card) {
     console.log("tour ", flips/2);    // DEBUG only
     switch (flips) {
       case twoStars: {
+        console.log(stars[2]);
+        stars[2].classList.replace('fa-star','fa-minus');
         console.log("Plus que deux étoiles")
         break;
       }
       case oneStar: {
         console.log("Plus qu'une étoile");
+        stars[1].classList.replace('fa-star','fa-minus');
         break;
       }
       case maxFlips: {
         console.log("Fin du jeu");
+        stars[0].classList.replace('fa-star','fa-minus');
         break;
       }
-    }
-  };
-  console.log(flips);                 // DEBUG only
+    };
+  }
+  console.log(flips);
 }
 /*******************************************************************************
   Start the game:
@@ -102,6 +105,12 @@ function flipCard(card) {
 *******************************************************************************/
 function startGame() {
   flips = 0;
+  let star;
+
+  for(star=0; star<3; star++) {
+    stars[star].classList.replace('fa-minus','fa-star');
+  };
+
   for (let card=0; card<16; card++){
     cards[card].classList.remove('front');
     cards[card].classList.add('back');
@@ -115,7 +124,7 @@ function startGame() {
   /*
     Reset the timer if any was running and start a new one
                                                                               */
-  timer = -1;
+  timer = 0;
   if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
   timerIntervalId = window.setInterval(changeTimer, 1000);
   console.log(desk);            // DEBUG only
