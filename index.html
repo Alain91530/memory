@@ -65,50 +65,12 @@
 ***************************************************************************-->
 <body>
 
-  <header>
-    <div id="game-title">
-      <h1>Memory Game</h1>
-    </div>
-  </header>
 
   <main>
-
-    <section id="menu">
-      <div id="start-over" class="clickable">
-          <span title="Start new game" class="button">New game</span>
+    <header>
+      <div id="game-title">
+        <h1>Memory Game</h1>
       </div>
-      <div title="Display the rules" id="rules" class="clickable">
-
-        <!-- Create an anchor to open a popup           -->
-
-        <a class="button" href="#openPopUp">How to play?</a>
-
-        <div title="" id="openPopUp" class="popUp">
-          <div>
-
-            <!-- Create an anchor to close the popup           -->
-
-            <a href="#close" title="Close" class="close">X</a>
-            <h2>Rules:</h2>
-            <p>The deck have 8 pairs of cards. Each card show an animal.
-               You have to find all pairs in a limited number of moves.
-            </p>
-            <p>
-              Click on a card to see it's face, then click on a second card.
-                This counts for one move. If the cards match, they stay face
-                 up. Otherwise cards flip back face down.
-            </p>
-            <p>A timer shows how long you have been playing. Clicking on the
-               timer pauses the game.
-            </p>
-            <p>
-              You win when all cards are face up.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <div id="game">
       <div id="score">
         <div id="stars">
           <span class="button">
@@ -123,7 +85,48 @@
           </span>
         </div>
       </div>
-      <section id="deck">
+      <section id="menu">
+        <div id="start-over" class="clickable">
+            <span title="Start new game" class="button">New game</span>
+        </div>
+        <div title="Display the rules" id="rules" class="clickable">
+
+          <!-- Create an anchor to open a popup           -->
+
+          <a class="button" href="#openPopUp">How to play?</a>
+
+          <div title="" id="openPopUp" class="popUp">
+            <div>
+
+              <!-- Create an anchor to close the popup           -->
+
+              <a href="#close" title="Close" class="close">X</a>
+              <h2>Rules:</h2>
+              <p>The deck have 8 pairs of cards. Each card show an animal.
+                 You have to find all pairs in a limited number of moves.
+              </p>
+              <p>
+                Click on a card to see it's face, then click on a second card.
+                  This counts for one move. If the cards match, they stay face
+                   up. Otherwise cards flip back face down.
+              </p>
+              <p>A timer shows how long you have been playing. Clicking on the
+                 timer pauses the game.
+              </p>
+              <p>
+                You win when all cards are face up.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+    </header>
+
+
+    <div id="game">
+<div id="container">
+        <section id="deck">
         <div class="card back">
           <h2 class="picture">r</h2>
         </div>
@@ -172,6 +175,7 @@
         <div class="card back">
           <h2 class="picture">u</h2>
         </div>
+      </div>
       </section>
     </div>
   </main>
