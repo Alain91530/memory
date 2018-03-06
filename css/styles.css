@@ -229,8 +229,37 @@ main {
 
 /*	Narrow screens																														*/
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 500px) {
 
+	#desk {
+		width: 75%;
+	}
+
+#game {
+	height: 50vh;
+	width: 100%;
+}
+
+#game-title {
+	height: 15vh;
+}
+
+#score {
+	height: 10vh;
+}
+
+header{
+	order: 0;
+	max-width: 100%;
+}
+
+.button {
+	line-height: 2.5em;
+}
+
+.menu {
+	order: 3;
+}
 	#deck {
 		width: 265px;
 		height: 265px;
@@ -244,6 +273,7 @@ main {
 		height: 55px;
 	}
 	.picture {
-		font-size: 2vh;
+		font-size: 1.5em;
+		margin-top: 2vh
 	}
 }
