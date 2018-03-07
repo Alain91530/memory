@@ -14,6 +14,7 @@ let desk = document.getElementsByClassName('picture');
 //  Table containing the complete html elements of the cards of the desk
 let cards = document.getElementsByClassName('card');
 let timerScore = document.getElementById('time');
+let moveScore = document.getElementById('moves')
 let stars=document.getElementsByClassName('fa');
 
 // Differents stages of the game set as constants to be easy to change.
@@ -76,6 +77,7 @@ function flipCard(card) {
   card.classList.toggle('front');
   card.classList.toggle('back');
   if ((flips++)%2) {
+    moveScore.textContent = "Moves: "+(flips/2);
     console.log("tour ", flips/2);    // DEBUG only
     switch (flips) {
       case twoStars: {
@@ -129,6 +131,8 @@ function startGame() {
   timer = 0;
   if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
   timerIntervalId = window.setInterval(changeTimer, 1000);
+  moveScore.textContent = "Moves: 0";
+  timerScore.textContent = "Time: 00:00:00";
   console.log(desk);            // DEBUG only
 }
 /*******************************************************************************
