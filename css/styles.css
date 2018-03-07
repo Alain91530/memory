@@ -259,8 +259,8 @@ main {
 @media screen and (orientation: portrait) {
 
 	#deck {
-		width: 265px;
-		height: 265px;
+		width: 75vw;
+		height: 75vw;
 		max-height: 100%;
 		max-width: 100%;
 		padding: 10px;
@@ -276,7 +276,7 @@ main {
 	}
 
 	#score {
-		height: 10vh;
+		height: 15vh;
 	}
 
 	header{
@@ -285,19 +285,24 @@ main {
 	}
 
 	.button {
-		line-height: 2.5em;
+		font-size: 2.5vh;
 	}
 
 	.menu {
 		order: 3;
 	}
 
+	.pannel {
+		font-size: 0.8em;
+		margin-bottom: 1vh;
+	}
+
 	.card {
-		width: 55px;
-		height: 55px;
+		width: 16vw;
+		height: 16vw;
 	}
 	.picture {
-		font-size: 1.5em;
+		font-size: 5.5vh;
 		margin-top: 2vh
 	}
 }
