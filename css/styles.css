@@ -82,6 +82,10 @@ main {
 	padding-top: 2%;
 }
 
+#moves {
+	width: 100%;
+}
+
 #score {
 	border-top-style: solid;
 	border-top-width: 2px;
@@ -99,7 +103,7 @@ main {
 }
 
 #stars {
-	padding: 0 1vw 0 1vw;
+	color: grey;
 }
 
 /*******************************************************************************
@@ -152,6 +156,18 @@ main {
 
 .notMatching {
 	background-color: #faa;
+}
+
+.pannel {
+  background-color: #ffca28;
+  border-color: #310;
+  border-style: solid;
+  line-height: 1.2em;
+  text-decoration: none;
+	height: 1em;
+    padding-bottom: .4em;
+    padding-top: .1em;
+		width: 100%;
 }
 
 .picture {
