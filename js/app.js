@@ -2,10 +2,9 @@
 
     Variables
 *******************************************************************************/
-
-let timer = 0;
-
-let timerIntervalId = 0;
+let timer = 0;           // Number of seconds ellapsed playing a game
+let firstCard;           // Variable used to store the node of the first card
+let timerIntervalId = 0; // Store the value returned by setInterval
 let flips = 0;           // A move = 2 flips
 
 /*  Table containing the desk. It's filled with pairs of html elements
@@ -13,6 +12,7 @@ let flips = 0;           // A move = 2 flips
 let desk = document.getElementsByClassName('picture');
 //  Table containing the complete html elements of the cards of the desk
 let cards = document.getElementsByClassName('card');
+//  Elements for the score board (time, moves and stars)
 let timerScore = document.getElementById('time');
 let moveScore = document.getElementById('moves')
 let stars=document.getElementsByClassName('fa');
@@ -28,6 +28,10 @@ const play = document.querySelector('#start-over');
 
     Functions
 
+*******************************************************************************/
+
+/*******************************************************************************
+  Function called every second which format the string to display
 *******************************************************************************/
 
 function changeTimer() {
@@ -54,6 +58,9 @@ function changeTimer() {
     secs = "0"+secs;
   };
   timer++;
+
+// Change the DOM to display the timet value
+
   timerScore.textContent = "Time: "+hrs+mins+secs;
 }
 /*******************************************************************************
@@ -72,76 +79,115 @@ function shuffleCards() {
 }
 /*******************************************************************************
     Flip the side of a card
+      This function is the heart of the game logic.
+      It first checks if the card is front of back face
+      If it's a front face card it does nothing
+      Otherwise it put it on front and check if it's the second card of the
+      move.
+      If not the clickable class is removed to stop the change of cursor over it
+      and the card is stored to be able to check for a pair on second card of
+      the move.
+      If yes it adds one to the flip count to remove stars in accordance with
+      this number and then checks for a pair and let the card face up if it is.
+      If not it flips the fomer card and this one back and set back the first
+      card clickable.
 *******************************************************************************/
+
 function flipCard(card) {
-  card.classList.toggle('front');
-  card.classList.toggle('back');
-  if ((flips++)%2) {
-    moveScore.textContent = "Moves: "+(flips/2);
-    console.log("tour ", flips/2);    // DEBUG only
-    switch (flips) {
-      case twoStars: {
-        console.log(stars[2]);
-        stars[2].classList.replace('fa-star','fa-minus');
-        console.log("Plus que deux étoiles")
-        break;
+  if (card.classList.contains('back')){
+    card.classList.toggle('front');
+    card.classList.toggle('back');
+    if ((flips++)%2) {
+      moveScore.textContent = "Moves: "+(flips/2);
+      switch (flips) {
+        case twoStars: {
+          stars[2].classList.replace('fa-star','fa-minus');
+          break;
+        }
+        case oneStar: {
+          stars[1].classList.replace('fa-star','fa-minus');
+          break;
+        }
+        case maxFlips: {
+          stars[0].classList.replace('fa-star','fa-minus');
+          break;
+        }
+      };
+      if (card==firstCard) {
+        card.classList.add('matching');
+        firstCard.classList.add('matching')
       }
-      case oneStar: {
-        console.log("Plus qu'une étoile");
-        stars[1].classList.replace('fa-star','fa-minus');
-        break;
+      else {
+        card.classList.add('notMatching');
+        firstCard.classList.add('notMatching')
       }
-      case maxFlips: {
-        console.log("Fin du jeu");
-        stars[0].classList.replace('fa-star','fa-minus');
-        break;
-      }
+    }
+    else {
+      firstCard = card;
+      card.classList.toggle('clickable');
     };
-  }
-  console.log(flips);
+  };
 }
+
 /*******************************************************************************
   Start the game:
     - Shuffle the deck
     - Wait until a card is clicked
 *******************************************************************************/
 function startGame() {
-  flips = 0;
-  let star;
 
-  for(star=0; star<3; star++) {
+// Reset the number of cards flipped
+  flips = 0;
+
+// Set the number of stars in the score pannel to 3
+  for(let star=0; star<3; star++) {
     stars[star].classList.replace('fa-minus','fa-star');
   };
+
+/* Put all the cards back up, remove matching and notMatching class (this class
+   is use for the background color of the card) and finally set all cards at
+   clickable in order to have the right cursor on it.                          */
 
   for (let card=0; card<16; card++){
     cards[card].classList.remove('matching');
     cards[card].classList.remove('notMatching');
     cards[card].classList.remove('front');
     cards[card].classList.add('back');
+    cards[card].classList.add('clickable');
     };
+
+// Shuffle the card deck
+
   shuffleCards();
+
+// Set an event listener for the click on the cards.
+
   for (let card=0; card<16;card++){
-    cards[card].onclick = function(){
-      flipCard(this);
-    };
+    cards[card].addEventListener('click', function() {flipCard(this);})
   };
-  /*
-    Reset the timer if any was running and start a new one
-                                                                              */
+
+// Reset the timer if any was running and start a new one
+
   timer = 0;
+
+// Stop the timer if it isn't the first game
+
   if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
+
+// Start a timer each second pointingn to the function wich increase time played
+
   timerIntervalId = window.setInterval(changeTimer, 1000);
+
+// Reset time and moves to 0 score display.
+
   moveScore.textContent = "Moves: 0";
   timerScore.textContent = "Time: 00:00:00";
-  console.log(desk);            // DEBUG only
 }
+
 /*******************************************************************************
-  Game is loaded, just wait until player click on new Game
+  Game is loaded by html and css, just wait until player click on new Game
   This event stay active in order to allow player to abort a game and start a
   new one.
 *******************************************************************************/
-play.addEventListener('click', function(){startGame();
-});
 
-/*);
-card.addEventListener('click', flipCard());*/
+play.addEventListener('click', function(){startGame();});
