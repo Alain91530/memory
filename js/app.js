@@ -30,6 +30,13 @@ const play = document.querySelector('#start-over');
 
 *******************************************************************************/
 
+function notMatchingTransition(formerCard, card){
+  for (let i = 0; i<10; i++){
+   formerCard.classList.toggle('flipping');
+   card.classList.toggle('flipping');
+  };
+}
+
 /*******************************************************************************
   Function called every second which format the string to display
 *******************************************************************************/
@@ -118,8 +125,14 @@ function flipCard(card) {
         firstCard.classList.add('matching')
       }
       else {
-        card.classList.add('notMatching');
-        firstCard.classList.add('notMatching')
+/*        notMatchingTransition(firstCard, card); */
+        card.classList.add('flipping');
+        firstCard.classList.add('flipping');
+        setTimeout(test, 1500, firstCard, card);
+      /*  card.classList.add('back');
+        firstCard.classList.add('back');
+/*        card.classList.add('flipping');
+        firstCard.classList.add('flipping');*/
       }
     }
     else {
@@ -128,7 +141,11 @@ function flipCard(card) {
     };
   };
 }
+function test(fc,c){
+  fc.classList.add('back');
+  c.classList.add('back');
 
+}
 /*******************************************************************************
   Start the game:
     - Shuffle the deck

@@ -156,6 +156,8 @@ main {
 
 .notMatching {
 	background-color: #faa;
+/*	animation-duration: 2s;
+	animation-name: flip; */
 }
 
 .pannel {
@@ -305,4 +307,43 @@ main {
 		font-size: 5.5vh;
 		margin-top: 2vh
 	}
+}
+
+@keyframes flip {
+	from {
+		background-color: orange;
+		}
+/*	10% {
+		background-color: red;
+	}
+	20% {
+		background-color: orange;
+	}
+	30% {
+		background-color: red;
+	}
+	40% {
+		background-color: orange;
+	}
+	50% {
+		background-color: red;
+	}
+	60% {
+		background-color: orange;
+	}
+	70% {
+		background-color: red;
+	}
+	80% {
+		background-color: orange;
+	} */
+	to {
+		background-color: red;
+	}
+}
+
+.flipping {
+	animation-iteration-count: 10;
+	animation-duration: 100ms;
+	animation-name: flip;
 }
