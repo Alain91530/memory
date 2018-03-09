@@ -93,19 +93,33 @@
 #message {
 	display: flex;
 	flex-flow: wrap;
+  justify-content: center;
 	max-width: 70vw;
-	margin: 10% auto;
+	margin: 10% auto 3vh;
 	padding: 5px 20px 13px 20px;
 	border-radius: 10px;
 	background: linear-gradient(#fff, #d9bea6);
 }
 
+#end-choice {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  margin: auto;
+  width: 70vw;
+}
 .hide {
 	display: none;
 }
 #result {
 	width: 100%;
 	text-align: center;
+}
+
+.end-menu {
+  font-size: 3vw;
+  text-align: center;
+  width: 33%;
 }
 /*******************************************************************************
 
