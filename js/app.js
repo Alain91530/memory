@@ -18,7 +18,7 @@ let moveScore = document.getElementById('moves')
 let stars=document.getElementsByClassName('fa');
 
 // Differents stages of the game set as constants to be easy to change.
-const maxFlips = 48;
+const maxFlips = 2;
 const oneStar = 32;
 const twoStars = 16;
 
@@ -34,6 +34,8 @@ function notMatchingTransition(formerCard, card){
   for (let i = 0; i<10; i++){
    formerCard.classList.toggle('flipping');
    card.classList.toggle('flipping');
+   formerCard.classList.add('clickable');
+   card.classList.add('clickable');
   };
 }
 
@@ -82,7 +84,7 @@ function shuffleCards() {
     let saveCard = desk[card].textContent;
     desk[card].textContent = desk[randomCard].textContent;
     desk[randomCard].textContent = saveCard;
-    };
+  };
 }
 /*******************************************************************************
     Flip the side of a card
@@ -101,9 +103,10 @@ function shuffleCards() {
 *******************************************************************************/
 
 function flipCard(card) {
+  card.classList.toggle('clickable');
   if (card.classList.contains('back')){
-    card.classList.toggle('front');
-    card.classList.toggle('back');
+    card.classList.add('front');
+    card.classList.remove('back');
     if ((flips++)%2) {
       moveScore.textContent = "Moves: "+(flips/2);
       switch (flips) {
@@ -117,22 +120,25 @@ function flipCard(card) {
         }
         case maxFlips: {
           stars[0].classList.replace('fa-star','fa-minus');
+          setTimeout(endGame,1500);
           break;
         }
       };
-      if (card==firstCard) {
+      if (card.textContent==firstCard.textContent) {
         card.classList.add('matching');
         firstCard.classList.add('matching')
+        setTimeout(endGame,1500);
       }
       else {
-/*        notMatchingTransition(firstCard, card); */
         card.classList.add('flipping');
         firstCard.classList.add('flipping');
-        setTimeout(test, 1500, firstCard, card);
+        setTimeout(notMatchingCards, 1500, firstCard, card);
       /*  card.classList.add('back');
         firstCard.classList.add('back');
 /*        card.classList.add('flipping');
         firstCard.classList.add('flipping');*/
+      }
+      if(flips==maxFlips){
       }
     }
     else {
@@ -141,10 +147,18 @@ function flipCard(card) {
     };
   };
 }
-function test(fc,c){
-  fc.classList.add('back');
-  c.classList.add('back');
+function notMatchingCards(cardOne,cardTwo){
+  cardOne.classList.remove('flipping');
+  cardTwo.classList.remove('flipping');
+  cardOne.classList.remove('front');
+  cardTwo.classList.remove('front');
+  cardOne.classList.add('back');
+  cardTwo.classList.add('back');
 
+}
+function endGame() {
+  document.getElementById('end-game').classList.toggle('hide');
+  window.clearInterval(timerIntervalId);
 }
 /*******************************************************************************
   Start the game:

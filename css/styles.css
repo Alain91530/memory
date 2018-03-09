@@ -251,7 +251,28 @@ main {
 .close:hover {
  background: #d9bea6;
 }
+#end-game {
+  cursor: default;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;       /* Put the popup on top */
+/*	opacity:0;            /* Hide popUp           */
+	transition: opacity 400ms ease-in;
+  text-align: left;
+	pointer-events: none;
+}
 
+#message {
+	width: : 66.66%;
+
+}
+.hide {
+	display: none;
+}
 /*******************************************************************************
 
 		Breakpoint for portrait orientation.
@@ -308,35 +329,16 @@ main {
 		margin-top: 2vh
 	}
 }
+/*******************************************************************************
+
+		keyframe animation for non matching shuffleCards
+
+*******************************************************************************/
 
 @keyframes flip {
 	from {
 		background-color: orange;
 		}
-/*	10% {
-		background-color: red;
-	}
-	20% {
-		background-color: orange;
-	}
-	30% {
-		background-color: red;
-	}
-	40% {
-		background-color: orange;
-	}
-	50% {
-		background-color: red;
-	}
-	60% {
-		background-color: orange;
-	}
-	70% {
-		background-color: red;
-	}
-	80% {
-		background-color: orange;
-	} */
 	to {
 		background-color: red;
 	}
