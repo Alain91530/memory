@@ -186,11 +186,11 @@ function startGame() {
    clickable in order to have the right cursor on it.                          */
 
   for (let card=0; card<16; card++){
-    cards[card].classList.remove('matching');
-    cards[card].classList.remove('notMatching');
-    cards[card].classList.remove('front');
-    cards[card].classList.add('back');
-    cards[card].classList.add('clickable');
+    cards[card].classList.remove('matching');     // remove initial matching
+    cards[card].classList.remove('notMatching');  // or not matching display
+    cards[card].classList.remove('front');        // Put all cards on the
+    cards[card].classList.add('back');            // back
+    cards[card].classList.add('clickable');       // and the change cursor  over
     };
 
 // Shuffle the card deck
@@ -213,12 +213,17 @@ function startGame() {
 
   timerIntervalId = window.setInterval(changeTimer, 1000);
 
-// Reset time and moves to 0 score display and remove modal if any.
+// Reset time and moves to 0 score display and remove modal popup if any.
 
   moveScore.textContent = "Moves: 0";
   timerScore.textContent = "00h00m00s";
   document.getElementById('end-game').classList.add('hide');
 }
+
+/*******************************************************************************
+  Function for setting or unsetting event on clicks on cards accordind to
+  the phase of the game.
+*******************************************************************************/
 
 function makeCardsflippable(allowed) {
   if (allowed) {
@@ -234,13 +239,22 @@ function makeCardsflippable(allowed) {
 }
 
 /*******************************************************************************
-  Game is loaded by html and css, just wait until player click on new Game
+  Game is loaded by html and css, just wait until player click on new game or
+  stop at the end of a game.
   This event stay active in order to allow player to abort a game and start a
   new one.
 *******************************************************************************/
 
 play[0].addEventListener('click', startGame);
 play[1].addEventListener('click', startGame);
+
+/* Set the event to stop playing after a game. The function on this events
+   remove the event on card's click and change the cursor on card's hover     */
+
 document.querySelector('.stop').addEventListener('click', function() {
+  makeCardsflippable(false);
   document.getElementById('end-game').classList.add('hide');
+  for (let card=0; card<16; card++){
+    cards[card].classList.remove('clickable');
+    };
 });
