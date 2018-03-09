@@ -18,7 +18,7 @@ let moveScore = document.getElementById('moves');
 let stars = document.getElementsByClassName('fa');
 
 // Differents stages of the game set as constants to be easy to change.
-const maxFlips = 48;
+const maxFlips = 2;
 const oneStar = 32;
 const twoStars = 16;
 
@@ -47,30 +47,32 @@ function changeTimer() {
 /*
     Convert the timer in a string with xx:xx:xx format to change de DOM
                                                                               */
-  let hrs = Math.trunc(timer/3600)+":";
-  let mins = Math.trunc(timer/60)+":";
-  let secs = timer-(parseInt(mins)*60);
-  if ((hrs.length) == 2) {
-    hrs = "0"+hrs;
+  let hrs = Math.trunc(timer/3600);
+  let mins = (Math.trunc(timer/60)-(hrs*60));
+  let secs = (timer-((hrs*3600)+(mins*60)));
+  if (hrs<10) {
+    hrs = "0"+hrs+'h';
   }
   else {
-    hrs = hrs+":";
+    hrs = hrs+"h";
   };
-  if ((mins.length) == 2) {
-    mins = "0"+mins;
+  if (mins<10) {
+    mins = "0"+mins+"m";
   }
   else {
-    mins = mins+":";
+    mins = mins+"m";
   };
-  secs=secs+""
-  if ((secs.length) == 1) {
-    secs = "0"+secs;
+  if (secs<10) {
+    secs = "0"+secs+"s";
+  }
+  else {
+    secs = secs+"s";
   };
   timer++;
 
 // Change the DOM to display the timet value
 
-  timerScore.textContent = "Time: "+hrs+mins+secs;
+  timerScore.textContent = hrs+mins+secs;
 }
 /*******************************************************************************
     Shuffle the cards
@@ -214,7 +216,7 @@ function startGame() {
 // Reset time and moves to 0 score display.
 
   moveScore.textContent = "Moves: 0";
-  timerScore.textContent = "Time: 00:00:00";
+  timerScore.textContent = "00h00m00s";
 }
 
 /*******************************************************************************
@@ -223,5 +225,5 @@ function startGame() {
   new one.
 *******************************************************************************/
 
-play[0].addEventListener('click', function(){startGame();});
-play[1].addEventListener('click', function(){startGame();});
+play[0].addEventListener('click', startGame);
+play[1].addEventListener('click', startGame);
