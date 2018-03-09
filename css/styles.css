@@ -122,6 +122,21 @@ main {
 	width: 80%;
 }
 
+.end-button {
+  background-color: #ff9800;
+  border-color: #310;
+  border-radius: 30px;
+  border-style: solid;
+  line-height: 2.5em;
+  padding: 0.5em;
+  text-decoration: none;
+	width: 20%;
+}
+
+.end-button:hover {
+	background-color: #ffe0b2;
+}
+
 .card {
   color: brown;
   font-family: "animals",sans-serif;
@@ -251,6 +266,7 @@ main {
 .close:hover {
  background: #d9bea6;
 }
+
 #end-game {
   cursor: default;
 	position: fixed;
@@ -260,24 +276,25 @@ main {
 	left: 0;
 	background: rgba(0,0,0,0.8);
 	z-index: 99999;       /* Put the popup on top */
-/*	opacity:0;            /* Hide popUp
-	transition: opacity 400ms ease-in;*/
   text-align: left;
-/*	pointer-events: none; */
 }
 
 #message {
-	max-width: 300px;
-	position: relative;
+	display: flex;
+	flex-flow: wrap;
+	max-width: 70vw;
 	margin: 10% auto;
 	padding: 5px 20px 13px 20px;
 	border-radius: 10px;
 	background: linear-gradient(#fff, #d9bea6);
-	width: : 66.66%;
-
 }
+
 .hide {
 	display: none;
+}
+#result {
+	width: 100%;
+	text-align: center;
 }
 /*******************************************************************************
 
