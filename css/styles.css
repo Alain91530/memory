@@ -263,10 +263,16 @@ main {
 /*	opacity:0;            /* Hide popUp
 	transition: opacity 400ms ease-in;*/
   text-align: left;
-	pointer-events: none;
+/*	pointer-events: none; */
 }
 
 #message {
+	max-width: 300px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: linear-gradient(#fff, #d9bea6);
 	width: : 66.66%;
 
 }

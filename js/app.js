@@ -163,6 +163,8 @@ function notMatchingCards(cardOne,cardTwo){
 function endGame() {
   document.getElementById('end-game').classList.toggle('hide');
   window.clearInterval(timerIntervalId);
+  play[1].addEventListener('click', startGame);
+
 }
 /*******************************************************************************
   Start the game:
