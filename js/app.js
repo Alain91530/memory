@@ -18,7 +18,7 @@ let moveScore = document.getElementById('moves');
 let stars = document.getElementsByClassName('fa');
 
 // Differents stages of the game set as constants to be easy to change.
-const maxFlips = 2;
+const maxFlips = 48;
 const oneStar = 32;
 const twoStars = 16;
 
@@ -127,7 +127,9 @@ function flipCard(card) {
       if (card.target.textContent==firstCard.textContent) {
         card.target.classList.add('matching');
         firstCard.classList.add('matching')
-        setTimeout(endGame,1500);
+        if (document.getElementsByClassName('matching').length==16){
+          setTimeout(endGame,1500);
+        };
       }
       else {
         card.target.classList.add('flipping');
@@ -189,7 +191,7 @@ function startGame() {
 
 // Shuffle the card deck
 
-  shuffleCards();
+//  shuffleCards();
 
 // Set an event listener for the click on the cards.
 
