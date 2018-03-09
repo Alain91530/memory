@@ -260,8 +260,8 @@ main {
 	left: 0;
 	background: rgba(0,0,0,0.8);
 	z-index: 99999;       /* Put the popup on top */
-/*	opacity:0;            /* Hide popUp           */
-	transition: opacity 400ms ease-in;
+/*	opacity:0;            /* Hide popUp
+	transition: opacity 400ms ease-in;*/
   text-align: left;
 	pointer-events: none;
 }

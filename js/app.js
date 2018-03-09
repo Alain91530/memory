@@ -14,15 +14,15 @@ let desk = document.getElementsByClassName('picture');
 let cards = document.getElementsByClassName('card');
 //  Elements for the score board (time, moves and stars)
 let timerScore = document.getElementById('time');
-let moveScore = document.getElementById('moves')
-let stars=document.getElementsByClassName('fa');
+let moveScore = document.getElementById('moves');
+let stars = document.getElementsByClassName('fa');
 
 // Differents stages of the game set as constants to be easy to change.
 const maxFlips = 2;
 const oneStar = 32;
 const twoStars = 16;
 
-const play = document.querySelector('#start-over');
+const play = document.getElementsByClassName('start-over');
 
 /*******************************************************************************
 
@@ -103,10 +103,10 @@ function shuffleCards() {
 *******************************************************************************/
 
 function flipCard(card) {
-  card.classList.toggle('clickable');
-  if (card.classList.contains('back')){
-    card.classList.add('front');
-    card.classList.remove('back');
+  card.target.classList.toggle('clickable');
+  if (card.target.classList.contains('back')){
+    card.target.classList.add('front');
+    card.target.classList.remove('back');
     if ((flips++)%2) {
       moveScore.textContent = "Moves: "+(flips/2);
       switch (flips) {
@@ -124,15 +124,15 @@ function flipCard(card) {
           break;
         }
       };
-      if (card.textContent==firstCard.textContent) {
-        card.classList.add('matching');
+      if (card.target.textContent==firstCard.textContent) {
+        card.target.classList.add('matching');
         firstCard.classList.add('matching')
         setTimeout(endGame,1500);
       }
       else {
-        card.classList.add('flipping');
+        card.target.classList.add('flipping');
         firstCard.classList.add('flipping');
-        setTimeout(notMatchingCards, 1500, firstCard, card);
+        setTimeout(notMatchingCards, 1500, firstCard, card.target);
       /*  card.classList.add('back');
         firstCard.classList.add('back');
 /*        card.classList.add('flipping');
@@ -142,8 +142,8 @@ function flipCard(card) {
       }
     }
     else {
-      firstCard = card;
-      card.classList.toggle('clickable');
+      firstCard = card.target;
+      card.target.classList.toggle('clickable');
     };
   };
 }
@@ -194,7 +194,7 @@ function startGame() {
 // Set an event listener for the click on the cards.
 
   for (let card=0; card<16;card++){
-    cards[card].addEventListener('click', function() {flipCard(this);})
+    cards[card].addEventListener('click', flipCard)
   };
 
 // Reset the timer if any was running and start a new one
@@ -221,4 +221,5 @@ function startGame() {
   new one.
 *******************************************************************************/
 
-play.addEventListener('click', function(){startGame();});
+play[0].addEventListener('click', function(){startGame();});
+play[1].addEventListener('click', function(){startGame();});
