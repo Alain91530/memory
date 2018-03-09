@@ -18,7 +18,7 @@ let moveScore = document.getElementById('moves');
 let stars = document.getElementsByClassName('fa');
 
 // Differents stages of the game set as constants to be easy to change.
-const maxFlips = 2;
+const maxFlips = 4;
 const oneStar = 32;
 const twoStars = 16;
 
@@ -134,6 +134,7 @@ function flipCard(card) {
         };
       }
       else {
+        makeCardsflippable(false);
         card.target.classList.add('flipping');
         firstCard.classList.add('flipping');
         setTimeout(notMatchingCards, 1500, firstCard, card.target);
@@ -158,6 +159,7 @@ function notMatchingCards(cardOne,cardTwo){
   cardTwo.classList.remove('front');
   cardOne.classList.add('back');
   cardTwo.classList.add('back');
+  makeCardsflippable(true);
 
 }
 function endGame() {
@@ -197,9 +199,7 @@ function startGame() {
 
 // Set an event listener for the click on the cards.
 
-  for (let card=0; card<16;card++){
-    cards[card].addEventListener('click', flipCard)
-  };
+  makeCardsflippable(true);
 
 // Reset the timer if any was running and start a new one
 
@@ -218,6 +218,19 @@ function startGame() {
   moveScore.textContent = "Moves: 0";
   timerScore.textContent = "00h00m00s";
   document.getElementById('end-game').classList.add('hide');
+}
+
+function makeCardsflippable(allowed) {
+  if (allowed) {
+    for (let card=0; card<16;card++){
+      cards[card].addEventListener('click', flipCard);
+    };
+  }
+  else {
+    for (let card=0; card<16;card++){
+      cards[card].removeEventListener('click', flipCard);
+    };
+  }
 }
 
 /*******************************************************************************
