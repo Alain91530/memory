@@ -161,7 +161,7 @@ function notMatchingCards(cardOne,cardTwo){
 
 }
 function endGame() {
-  document.getElementById('end-game').classList.toggle('hide');
+  document.getElementById('end-game').classList.remove('hide');
   window.clearInterval(timerIntervalId);
 }
 /*******************************************************************************
@@ -213,10 +213,11 @@ function startGame() {
 
   timerIntervalId = window.setInterval(changeTimer, 1000);
 
-// Reset time and moves to 0 score display.
+// Reset time and moves to 0 score display and remove modal if any.
 
   moveScore.textContent = "Moves: 0";
   timerScore.textContent = "00h00m00s";
+  document.getElementById('end-game').classList.add('hide');
 }
 
 /*******************************************************************************
