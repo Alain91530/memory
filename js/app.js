@@ -228,3 +228,6 @@ function startGame() {
 
 play[0].addEventListener('click', startGame);
 play[1].addEventListener('click', startGame);
+document.querySelector('.stop').addEventListener('click', function() {
+  document.getElementById('end-game').classList.add('hide');
+});
