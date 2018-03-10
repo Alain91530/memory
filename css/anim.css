@@ -108,6 +108,11 @@
   margin: auto;
   width: 70vw;
 }
+
+#final-score {
+  text-align: center;
+}
+
 .hide {
 	display: none;
 }

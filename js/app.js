@@ -18,7 +18,7 @@ let moveScore = document.getElementById('moves');
 let stars = document.getElementsByClassName('fa');
 
 // Differents stages of the game set as constants to be easy to change.
-const maxFlips = 4;
+const maxFlips = 14;
 const oneStar = 32;
 const twoStars = 16;
 
@@ -29,15 +29,6 @@ const play = document.getElementsByClassName('start-over');
     Functions
 
 *******************************************************************************/
-
-function notMatchingTransition(formerCard, card){
-  for (let i = 0; i<10; i++){
-   formerCard.classList.toggle('flipping');
-   card.classList.toggle('flipping');
-   formerCard.classList.add('clickable');
-   card.classList.add('clickable');
-  };
-}
 
 /*******************************************************************************
   Function called every second which format the string to display
@@ -122,15 +113,14 @@ function flipCard(card) {
         }
         case maxFlips: {
           stars[0].classList.replace('fa-star','fa-minus');
-          setTimeout(endGame,1500);
           break;
         }
       };
       if (card.target.textContent==firstCard.textContent) {
         card.target.classList.add('matching');
         firstCard.classList.add('matching')
-        if (document.getElementsByClassName('matching').length==16){
-          setTimeout(endGame,1500);
+        if (document.getElementsByClassName('matching').length==14){
+          setTimeout(endGame(true),1500);
         };
       }
       else {
@@ -138,13 +128,10 @@ function flipCard(card) {
         card.target.classList.add('flipping');
         firstCard.classList.add('flipping');
         setTimeout(notMatchingCards, 1500, firstCard, card.target);
-      /*  card.classList.add('back');
-        firstCard.classList.add('back');
-/*        card.classList.add('flipping');
-        firstCard.classList.add('flipping');*/
-      }
-      if(flips==maxFlips){
-      }
+        if(flips==maxFlips){
+          setTimeout(endGame(false),1700);
+        };
+      };
     }
     else {
       firstCard = card.target;
@@ -152,6 +139,7 @@ function flipCard(card) {
     };
   };
 }
+
 function notMatchingCards(cardOne,cardTwo){
   cardOne.classList.remove('flipping');
   cardTwo.classList.remove('flipping');
@@ -162,10 +150,34 @@ function notMatchingCards(cardOne,cardTwo){
   makeCardsflippable(true);
 
 }
-function endGame() {
+
+function endGame(win) {
+  let winHtml;
+  if (win) {
+    winHtml = "<h2>Well done!</h2>";
+    document.getElementById('result').innerHTML = winHtml;
+    winHtml = "<h3>Done in "+document.getElementById('time').textContent+"</h3>";
+    winHtml = winHtml+"<h3> You made it in "+flips/2+" moves";
+    winHtml = winHtml+ "<h3>Your final score is </h3>";
+    winHtml = winHtml+document.getElementById('stars').innerHTML;
+    winHtml = winHtml+"<img src=\"img/happy.svg\" alt=\"happy face\">";
+    document.getElementById('final-score').innerHTML = winHtml;
+  }
+  else {
+    winHtml = "<h2>Game over!!!</h2>";
+    document.getElementById('result').innerHTML = winHtml;
+    winHtml = "<h3>Too many moves!</h3>";
+    winHtml = winHtml+"<img src=\"img/sad.svg\" alt=\"sad face\">";
+    document.getElementById('final-score').innerHTML = winHtml;
+  };
   document.getElementById('end-game').classList.remove('hide');
   window.clearInterval(timerIntervalId);
+  for (let card=0; card<16; card++){
+    cards[card].classList.remove('back');
+    cards[card].classList.add('front');
+  }
 }
+
 /*******************************************************************************
   Start the game:
     - Shuffle the deck
