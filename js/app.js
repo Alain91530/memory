@@ -41,6 +41,9 @@ function changeTimer() {
   let hrs = Math.trunc(timer/3600);
   let mins = (Math.trunc(timer/60)-(hrs*60));
   let secs = (timer-((hrs*3600)+(mins*60)));
+
+//  Adding a leading 0 if needed
+
   if (hrs<10) {
     hrs = "0"+hrs+'h';
   }
@@ -65,6 +68,7 @@ function changeTimer() {
 
   timerScore.textContent = hrs+mins+secs;
 }
+
 /*******************************************************************************
     Shuffle the cards
     (Generic algorythm found on internet to shuffle a list of objects)
@@ -79,6 +83,7 @@ function shuffleCards() {
     desk[randomCard].textContent = saveCard;
   };
 }
+
 /*******************************************************************************
     Flip the side of a card
       This function is the heart of the game logic.
@@ -96,12 +101,17 @@ function shuffleCards() {
 *******************************************************************************/
 
 function flipCard(card) {
-//  card.target.classList.toggle('clickable');
+  // Remove the change of cursor on facing up cards
+  card.target.classList.toggle('clickable');
+  // Check that the click was on a backside card
   if (card.target.classList.contains('back')){
+    // Show the face of the card
     card.target.classList.add('front');
     card.target.classList.remove('back');
+    // If the card is the 2nd of a move we need to increase the moves number
     if ((flips++)%2) {
       moveScore.textContent = "Moves: "+(flips/2);
+      // Then we check if the stars score needs to be changed
       switch (flips) {
         case twoStars: {
           stars[2].classList.replace('fa-star','fa-minus');
@@ -111,29 +121,39 @@ function flipCard(card) {
           stars[1].classList.replace('fa-star','fa-minus');
           break;
         }
+        // we can't Stop the game now: it might be the last matching pair
         case maxFlips: {
           stars[0].classList.replace('fa-star','fa-minus');
           break;
         }
       };
+      // Checking if it's a matching pair
       if (card.target.querySelector('h2').textContent==firstCard.querySelector('h2').textContent) {
         card.target.classList.add('matching');
         firstCard.classList.add('matching')
+        // Checking if it's the las pair we need to win
         if (document.getElementsByClassName('matching').length==16){
           setTimeout(endGame(true),1700);
         };
       }
+      // Current pair doesn't match
       else {
+        // Remove the event on click during animation
         makeCardsflippable(false);
+        // Do the animation on the pair
         card.target.classList.add('flipping');
         firstCard.classList.add('flipping');
-        setTimeout(notMatchingCards, 1700, firstCard, card.target);
+        // Set the time out to flip back the cards at the en of the animation
+        setTimeout(notMatchingCards, 1500, firstCard, card.target);
+        // Check if the last allowed move is reached and ends the game if so
         if(flips==maxFlips){
           setTimeout(endGame(false),1700);
         };
       };
 
     }
+    // It was the 1st card of a move just store it to be able to compare it to
+    // next card flipped and toggle the cursor change on hover to not clickable
     else {
       firstCard = card.target;
       card.target.classList.toggle('clickable');
@@ -141,6 +161,11 @@ function flipCard(card) {
   };
 }
 
+/*******************************************************************************
+    Function to be called by a time count
+    It hides back the cards of a move after the animation. The time out calling
+    it allows the time for the animation to be seen.
+*******************************************************************************/
 function notMatchingCards(cardOne,cardTwo){
   cardOne.classList.remove('flipping');
   cardTwo.classList.remove('flipping');
@@ -149,9 +174,14 @@ function notMatchingCards(cardOne,cardTwo){
   cardOne.classList.add('back');
   cardTwo.classList.add('back');
   makeCardsflippable(true);
-
 }
 
+/*******************************************************************************
+    End a game
+    The function sets the html of the modal popup at the end of a game.
+    If "win" is true, the winning popup with score is set.
+    If "win" is false, the popup just show a sad emoji.
+*******************************************************************************/
 function endGame(win) {
   let winHtml;
   if (win) {
@@ -208,7 +238,7 @@ function startGame() {
 
 // Shuffle the card deck
 
-//  shuffleCards();
+  shuffleCards();
 
 // Set an event listener for the click on the cards.
 
@@ -235,7 +265,10 @@ function startGame() {
 
 /*******************************************************************************
   Function for setting or unsetting event on clicks on cards accordind to
-  the phase of the game.
+  the phase of the game. The function is used to avoid clicks on cards during
+  animations.
+  If "allowed" is true thi envent is set on all cards of the deck.
+  If "allowed" is false the event is removed.
 *******************************************************************************/
 
 function makeCardsflippable(allowed) {
@@ -258,16 +291,20 @@ function makeCardsflippable(allowed) {
   new one.
 *******************************************************************************/
 
-play[0].addEventListener('click', startGame);
-play[1].addEventListener('click', startGame);
+play[0].addEventListener('click', startGame); // Event for the button in game
+play[1].addEventListener('click', startGame); // Event for the button in popup
 
 /* Set the event to stop playing after a game. The function on this events
    remove the event on card's click and change the cursor on card's hover     */
 
 document.querySelector('.stop').addEventListener('click', function() {
   makeCardsflippable(false);
+  /* The function when game is just stopped hides the popup, change the cursor
+     and flip all cards face up whithout changing colour of not found pairs   */
   document.getElementById('end-game').classList.add('hide');
   for (let card=0; card<16; card++){
     cards[card].classList.remove('clickable');
+    cards[card].classList.remove('back');
+    cards[card].classList.add('front');
     };
 });
