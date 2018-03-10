@@ -6,6 +6,7 @@ let timer = 0;           // Number of seconds ellapsed playing a game
 let firstCard;           // Variable used to store the node of the first card
 let timerIntervalId = 0; // Store the value returned by setInterval
 let flips = 0;           // A move = 2 flips
+let hintLeft = 3;
 
 /*  Table containing the desk. It's filled with pairs of html elements
     representing the value of the eight pairs of different cards              */
@@ -218,6 +219,7 @@ function startGame() {
 
 // Reset the number of cards flipped
   flips = 0;
+  hintLeft = 3;
 
 // Set the number of stars in the score pannel to 3
   for(let star=0; star<3; star++) {
@@ -252,7 +254,7 @@ function startGame() {
 
   if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
 
-// Start a timer each second pointingn to the function wich increase time played
+// Start a timer each second pointing to the function wich increase time played
 
   timerIntervalId = window.setInterval(changeTimer, 1000);
 
@@ -267,9 +269,40 @@ function startGame() {
     window.clearInterval(timerIntervalId);
     document.getElementById('game-paused').classList.remove('hide')
   });
+
+// Set an event to get a hint when <esc> is pressed.
+
+  document.addEventListener('keydown',hint);
+
+// Hide an eventual previous end of game modal popup.
+
   document.getElementById('end-game').classList.add('hide');
 }
+function hint(e){
+  let backsideCards=document.getElementsByClassName('back')
+  let randomCard = Math.floor(Math.random()*(backsideCards.length));
+  let hintCard = backsideCards[randomCard];
+  if (e.which===27){
 
+    hintCard.classList.add('front');
+    hintCard.classList.remove('back');
+    document.removeEventListener('keydown',hint);
+    for (let c=0; c<16; c++){
+      document.removeEventListener('click', flipCard);
+    }
+    hintLeft--;
+    setTimeout(hideHint, 1000, hintCard);
+  }
+}
+
+function hideHint(putItBack) {
+  for (let c=0; c<16; c++){
+    document.addEventListener('click',flipCard);
+    putItBack.classList.remove('front');
+    putItBack.classList.add('back');
+  }
+  if ((hintLeft)>0) {document.addEventListener('keydown',hint)};
+}
 /*******************************************************************************
   Function for setting or unsetting event on clicks on cards accordind to
   the phase of the game. The function is used to avoid clicks on cards during
@@ -315,6 +348,8 @@ document.querySelector('.stop').addEventListener('click', function() {
     cards[card].classList.add('front');
     };
 });
+
+// Set an event to resume game after pausing by clicking on timer
 
 document.getElementById('restart').addEventListener('click', function(){
   timerIntervalId = window.setInterval(changeTimer, 1000);
