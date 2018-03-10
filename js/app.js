@@ -96,7 +96,7 @@ function shuffleCards() {
 *******************************************************************************/
 
 function flipCard(card) {
-  card.target.classList.toggle('clickable');
+//  card.target.classList.toggle('clickable');
   if (card.target.classList.contains('back')){
     card.target.classList.add('front');
     card.target.classList.remove('back');
@@ -116,7 +116,7 @@ function flipCard(card) {
           break;
         }
       };
-      if (card.target.textContent==firstCard.textContent) {
+      if (card.target.querySelector('h2').textContent==firstCard.querySelector('h2').textContent) {
         card.target.classList.add('matching');
         firstCard.classList.add('matching')
         if (document.getElementsByClassName('matching').length==14){
@@ -128,9 +128,9 @@ function flipCard(card) {
         card.target.classList.add('flipping');
         firstCard.classList.add('flipping');
         setTimeout(notMatchingCards, 1500, firstCard, card.target);
-        if(flips==maxFlips){
-          setTimeout(endGame(false),1700);
-        };
+      };
+      if(flips==maxFlips){
+        setTimeout(endGame(false),1700);
       };
     }
     else {
