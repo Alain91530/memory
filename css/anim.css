@@ -137,7 +137,43 @@
 }
 
 #result {
+  cursor: default;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;       /* Put the popup on top */
+  text-align: left;
+}
+/*******************************************************************************
 
+    Modal popup when game is game is paused
+
+*******************************************************************************/
+
+#game-paused {
+  cursor: default;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;       /* Put the popup on top */
+  text-align: left;
+}
+
+#pause {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  max-width: 45vw;
+  margin: 10% auto 3vh;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: linear-gradient(#fff, #d9bea6);
 }
 /*******************************************************************************
 

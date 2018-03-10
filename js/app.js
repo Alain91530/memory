@@ -260,6 +260,13 @@ function startGame() {
 
   moveScore.textContent = "Moves: 0";
   timerScore.textContent = "00h00m00s";
+
+// Set an event on a click on timer to pause the game.
+
+  document.getElementById('time').addEventListener('click',function(){
+    window.clearInterval(timerIntervalId);
+    document.getElementById('game-paused').classList.remove('hide')
+  });
   document.getElementById('end-game').classList.add('hide');
 }
 
@@ -308,3 +315,8 @@ document.querySelector('.stop').addEventListener('click', function() {
     cards[card].classList.add('front');
     };
 });
+
+document.getElementById('restart').addEventListener('click', function(){
+  timerIntervalId = window.setInterval(changeTimer, 1000);
+  document.getElementById('game-paused').classList.add('hide');
+})
