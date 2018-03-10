@@ -18,8 +18,8 @@ let moveScore = document.getElementById('moves');
 let stars = document.getElementsByClassName('fa');
 
 // Differents stages of the game set as constants to be easy to change.
-const maxFlips = 14;
-const oneStar = 32;
+const maxFlips = 32;
+const oneStar = 24;
 const twoStars = 16;
 
 const play = document.getElementsByClassName('start-over');
@@ -119,19 +119,20 @@ function flipCard(card) {
       if (card.target.querySelector('h2').textContent==firstCard.querySelector('h2').textContent) {
         card.target.classList.add('matching');
         firstCard.classList.add('matching')
-        if (document.getElementsByClassName('matching').length==14){
-          setTimeout(endGame(true),1500);
+        if (document.getElementsByClassName('matching').length==16){
+          setTimeout(endGame(true),1700);
         };
       }
       else {
         makeCardsflippable(false);
         card.target.classList.add('flipping');
         firstCard.classList.add('flipping');
-        setTimeout(notMatchingCards, 1500, firstCard, card.target);
+        setTimeout(notMatchingCards, 1700, firstCard, card.target);
+        if(flips==maxFlips){
+          setTimeout(endGame(false),1700);
+        };
       };
-      if(flips==maxFlips){
-        setTimeout(endGame(false),1700);
-      };
+
     }
     else {
       firstCard = card.target;
@@ -160,7 +161,7 @@ function endGame(win) {
     winHtml = winHtml+"<h3> You made it in "+flips/2+" moves";
     winHtml = winHtml+ "<h3>Your final score is </h3>";
     winHtml = winHtml+document.getElementById('stars').innerHTML;
-    winHtml = winHtml+"<img src=\"img/happy.svg\" alt=\"happy face\">";
+    winHtml = winHtml+"<p><img class=\"emoji\" src=\"img/happy.svg\" alt=\"happy face\"></p>";
     document.getElementById('final-score').innerHTML = winHtml;
   }
   else {

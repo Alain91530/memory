@@ -110,21 +110,34 @@
 }
 
 #final-score {
+  font-size: 0.7em;
+  line-height: 0.5vw;
   text-align: center;
 }
 
 .hide {
 	display: none;
 }
+
 #result {
-	width: 100%;
+  font-size: 1em;
+  line-height: .1vw;
 	text-align: center;
+  width: 100%;
+}
+
+.emoji{
+  max-width: 11vw;
 }
 
 .end-menu {
   font-size: 3vw;
   text-align: center;
   width: 33%;
+}
+
+#result {
+
 }
 /*******************************************************************************
 
