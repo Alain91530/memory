@@ -8,10 +8,10 @@ let timerIntervalId = 0; // Store the value returned by setInterval
 let flips = 0;           // A move = 2 flips
 let hintLeft = 3;
 
-/*  Table containing the desk. It's filled with pairs of html elements
+/*  Table containing the deck. It's filled with pairs of html elements
     representing the value of the eight pairs of different cards              */
-let desk = document.getElementsByClassName('picture');
-//  Table containing the complete html elements of the cards of the desk
+let deck = document.getElementsByClassName('picture');
+//  Table containing the complete html elements of the cards of the deck
 let cards = document.getElementsByClassName('card');
 //  Elements for the score board (time, moves and stars)
 let timerScore = document.getElementById('time');
@@ -37,8 +37,8 @@ const play = document.getElementsByClassName('start-over');
         format and Display ellaped time in score pannel.
 
     - flipCard(card):
-        Action: flip the clicked card and do all need checks accordind to the game
-        logic (see comments before the function for details).
+        Action: flip the clicked card and do all need checks accordind to the
+        game logic (see comments before the function for details).
         Parameter: the DOM element clicked returned by the event.
 
     - notMatchingCards(cardOne,cardTwo):
@@ -106,6 +106,10 @@ function changeTimer() {
 // Change the DOM to display the timet value
 
   timerScore.textContent = hrs+mins+secs;
+
+// Store the game in local storage
+
+  storeGame ();
 }
 
 /*******************************************************************************
@@ -306,8 +310,50 @@ function startGame() {
 // Hide an eventual previous end of game modal popup.
 
   document.getElementById('end-game').classList.add('hide');
+
+// Store the game in local storage
+
+  if (localStorage.getItem('saved')=="true") {
+    restoreGame();
+    makeCardsflippable(true);
+  }
+  else {
+    storeGame();
+    makeCardsflippable(true);
+  }
+}
+function restoreGame() {
+  timer = localStorage.getItem('timer');
+  firstCard = localStorage.getItem('firstCard');
+  flips = localStorage.getItem('flips');
+  hintLeft = localStorage.getItem('hintLeft');
+
+  document.getElementById('deck').innerHTML = JSON.parse(localStorage.getItem('deck'));
+  //  Table containing the complete html elements of the cards of the deck
+//  cards = localStorage.getItem('cards');
+  //  Elements for the score board (time, moves and stars)
+//  timerScore = JSON.parse(localStorage.getItem('timerScore'));
+//  moveScore = JSON.parse(localStorage.getItem('moveScore'));
+//  stars = JSON.parse(localStorage.getItem('stars'));
 }
 
+function storeGame() {
+  localStorage.setItem('saved',true);
+  localStorage.setItem('timer', timer);
+
+  localStorage.setItem('flips',flips);
+  localStorage.setItem('hintLeft',hintLeft);
+
+  localStorage.setItem('deck',JSON.stringify(document.getElementById('deck').innerHTML));
+//  localStorage.setItem('cards',cards);
+  //  Elements for the score board (time, moves and stars)
+//  localStorage.setItem('timerScore',document.getElementById('timerScore').innerHTML);
+//  localStorage.setItem('moves',document.getElementById('moves').innerHTML);
+//  localStorage.setItem('stars',document.getElementById('stars').innerHTML);
+//  localStorage.setItem('moveScore',moveScore);
+//  localStorage.setItem('stars',stars);
+
+}
 /*******************************************************************************
   Functions to be called for repetitive actions of the logic of the Game
 
@@ -394,13 +440,13 @@ function makeCardsflippable(allowed) {
 *******************************************************************************/
 
 function shuffleCards() {
-  for (let card = desk.length-1; card > 0; card--){
-    // pick a random position in the desk
+  for (let card = deck.length-1; card > 0; card--){
+    // pick a random position in the deck
     let randomCard = Math.floor(Math.random()*(card+1));
-    // swap desk[posion] and desk[rendomPosition]
-    let saveCard = desk[card].textContent;
-    desk[card].textContent = desk[randomCard].textContent;
-    desk[randomCard].textContent = saveCard;
+    // swap deck[posion] and deck[rendomPosition]
+    let saveCard = deck[card].textContent;
+    deck[card].textContent = deck[randomCard].textContent;
+    deck[randomCard].textContent = saveCard;
   };
 }
 
