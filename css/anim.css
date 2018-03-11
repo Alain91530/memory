@@ -230,12 +230,8 @@
 *******************************************************************************/
 
 @keyframes flip {
-	from {
-		background-color: orange;
-		}
-	to {
-		background-color: red;
-	}
+	from {background-color: orange;}
+	to {background-color: red;}
 }
 
 .flipping {
@@ -244,8 +240,13 @@
 	animation-name: flip;
 }
 
-@keyframes match-flip {
-	from {
+@keyframes matchflip {
+	from {color: lightgreen;}
+  to {color: brown;}
+}
 
-	}
+.matching {
+  animation-iteration-count: 1;
+  animation-duration: 3500ms;
+  animation-name: matchflip;
 }
