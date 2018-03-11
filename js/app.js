@@ -27,9 +27,47 @@ const play = document.getElementsByClassName('start-over');
 
 /*******************************************************************************
 
-    Functions
+                            Functions
 
-*******************************************************************************/
+/*******************************************************************************
+  Functions used as event listener:
+
+    - changeTimer():
+        called every second when game is started Add one second to timer,
+        format and Display ellaped time in score pannel.
+
+    - flipCard(card):
+        Action: flip the clicked card and do all need checks accordind to the game
+        logic (see comments before the function for details).
+        Parameter: the DOM element clicked returned by the event.
+
+    - notMatchingCards(cardOne,cardTwo):
+        called to flip on the back side a non matching pair of cards. A time
+        count is needed in order to let the animation goes to its end.
+
+    - function hideHint(putItBack):
+        Action: Put a card back face up after a hint. It's called by a timer
+        in order to give some delay to the player to see the hint. If hint are
+        still allowed, the proper event is added back.
+        Parameter:
+          putItBack: the DOM element of the card to be put back face up.
+
+    - function hint(e):
+        Action: fip a random back face card to front for 1 to 2 seconds to give
+        a hint to player. On exit set a time out to hide the hint. Decrease the
+        number of allowed hint.
+        Parameter:
+          e: keyboard event wich called it, used to retrieve the stroked key and
+          display the hint or not.
+
+    - startGame():
+        Event listener for clicks on the play button in main window or in modal
+        popup at the end of the game. It initialize everything to have a clean
+        shuffled deck and then set up the logic of the game:
+            - Event on click on cards.
+            - Interval for the timer.
+            - Event to pause the game on click of the timer.
+            - Event to show a hint.
 
 /*******************************************************************************
   Function called every second which format the string to display
@@ -68,21 +106,6 @@ function changeTimer() {
 // Change the DOM to display the timet value
 
   timerScore.textContent = hrs+mins+secs;
-}
-
-/*******************************************************************************
-    Shuffle the cards
-    (Generic algorythm found on internet to shuffle a list of objects)
-*******************************************************************************/
-function shuffleCards() {
-  for (let card = desk.length-1; card > 0; card--){
-    // pick a random position in the desk
-    let randomCard = Math.floor(Math.random()*(card+1));
-    // swap desk[posion] and desk[rendomPosition]
-    let saveCard = desk[card].textContent;
-    desk[card].textContent = desk[randomCard].textContent;
-    desk[randomCard].textContent = saveCard;
-  };
 }
 
 /*******************************************************************************
@@ -163,10 +186,49 @@ function flipCard(card) {
 }
 
 /*******************************************************************************
-    Function to be called by a time count
+    Function to hide a hint avec a short delay
+    If the number max of hints is reached the event to display hints is not set
+    again.
+*******************************************************************************/
+
+function hideHint(putItBack) {
+  for (let c=0; c<16; c++){
+    document.addEventListener('click',flipCard);
+    putItBack.classList.remove('front');
+    putItBack.classList.add('back');
+  }
+  if ((hintLeft)>0) {document.addEventListener('keydown',hint)};
+}
+
+/*******************************************************************************
+  Event listener on stroke of <esc> key
+  Flip a random card in thos which are still face down for 1 to 2 seconds
+  Cards are made unclickable during that (event removed, cursor change disable)
+  in order to avoid any problem in the game logic.
+*******************************************************************************/
+
+function hint(e){
+  let backsideCards=document.getElementsByClassName('back')
+  let randomCard = Math.floor(Math.random()*(backsideCards.length));
+  let hintCard = backsideCards[randomCard];
+  if (e.which===27) {
+    hintCard.classList.add('front');
+    hintCard.classList.remove('back');
+    document.removeEventListener('keydown',hint);
+    for (let c=0; c<16; c++){
+      document.removeEventListener('click', flipCard);
+    }
+    hintLeft--;
+    setTimeout(hideHint, 1000, hintCard);
+  }
+}
+
+/*******************************************************************************
+    Function called by a time count
     It hides back the cards of a move after the animation. The time out calling
     it allows the time for the animation to be seen.
 *******************************************************************************/
+
 function notMatchingCards(cardOne,cardTwo){
   cardOne.classList.remove('flipping');
   cardTwo.classList.remove('flipping');
@@ -178,42 +240,9 @@ function notMatchingCards(cardOne,cardTwo){
 }
 
 /*******************************************************************************
-    End a game
-    The function sets the html of the modal popup at the end of a game.
-    If "win" is true, the winning popup with score is set.
-    If "win" is false, the popup just show a sad emoji.
-*******************************************************************************/
-function endGame(win) {
-  let winHtml;
-  if (win) {
-    winHtml = "<h2>Well done!</h2>";
-    document.getElementById('result').innerHTML = winHtml;
-    winHtml = "<h3>Done in "+document.getElementById('time').textContent+"</h3>";
-    winHtml = winHtml+"<h3> You made it in "+flips/2+" moves";
-    winHtml = winHtml+ "<h3>Your final score is </h3>";
-    winHtml = winHtml+document.getElementById('stars').innerHTML;
-    winHtml = winHtml+"<p><img class=\"emoji\" src=\"img/happy.svg\" alt=\"happy face\"></p>";
-    document.getElementById('final-score').innerHTML = winHtml;
-  }
-  else {
-    winHtml = "<h2>Game over!!!</h2>";
-    document.getElementById('result').innerHTML = winHtml;
-    winHtml = "<h3>Too many moves!</h3>";
-    winHtml = winHtml+"<img src=\"img/sad.svg\" alt=\"sad face\">";
-    document.getElementById('final-score').innerHTML = winHtml;
-  };
-  document.getElementById('end-game').classList.remove('hide');
-  window.clearInterval(timerIntervalId);
-  for (let card=0; card<16; card++){
-    cards[card].classList.remove('back');
-    cards[card].classList.add('front');
-  }
-}
-
-/*******************************************************************************
-  Start the game:
-    - Shuffle the deck
-    - Wait until a card is clicked
+    Start the game:
+      - Shuffle the deck
+      - Wait until a card is clicked
 *******************************************************************************/
 function startGame() {
 
@@ -278,31 +307,66 @@ function startGame() {
 
   document.getElementById('end-game').classList.add('hide');
 }
-function hint(e){
-  let backsideCards=document.getElementsByClassName('back')
-  let randomCard = Math.floor(Math.random()*(backsideCards.length));
-  let hintCard = backsideCards[randomCard];
-  if (e.which===27){
 
-    hintCard.classList.add('front');
-    hintCard.classList.remove('back');
-    document.removeEventListener('keydown',hint);
-    for (let c=0; c<16; c++){
-      document.removeEventListener('click', flipCard);
-    }
-    hintLeft--;
-    setTimeout(hideHint, 1000, hintCard);
+/*******************************************************************************
+  Functions to be called for repetitive actions of the logic of the Game
+
+    endGame(win):
+      Action: modifify the DOM to display the end of game modal popup.
+      Stop the timer and put all cards front side up.
+      Parameter: win, boolean to set the rpoper popup in accordance of the state
+      game.
+
+    makeCardsflippable(allowed):
+      Action: add or remove an event on all DOM's element of the class .card
+      according to the parameter.
+      Parameter: allowed
+        Boolean, true the cards are clickble, false they aren't.
+
+    shuffleCards():
+      generic function to shuffle any object which can be enumarated.
+      algorythm was found on the net on several website.
+*******************************************************************************/
+
+/*******************************************************************************
+    End a game
+    The function sets the html of the modal popup at the end of a game.
+    If "win" is true, the winning popup with score is set.
+    If "win" is false, the popup just show a sad emoji.
+*******************************************************************************/
+
+function endGame(win) {
+  let winHtml;
+  if (win) {
+// Setup a winning popup.
+    winHtml = "<h2>Well done!</h2>";
+    document.getElementById('result').innerHTML = winHtml;
+    winHtml = "<h3>Done in "+document.getElementById('time').textContent+"</h3>";
+    winHtml = winHtml+"<h3> You made it in "+flips/2+" moves";
+    winHtml = winHtml+ "<h3>Your final score is </h3>";
+    winHtml = winHtml+document.getElementById('stars').innerHTML;
+    winHtml = winHtml+"<p><img class=\"emoji\" src=\"img/happy.svg\" alt=\"happy face\"></p>";
+    document.getElementById('final-score').innerHTML = winHtml;
+  }
+// Setup a loosing popup.
+  else {
+    winHtml = "<h2>Game over!!!</h2>";
+    document.getElementById('result').innerHTML = winHtml;
+    winHtml = "<h3>Too many moves!</h3>";
+    winHtml = winHtml+"<img src=\"img/sad.svg\" alt=\"sad face\">";
+    document.getElementById('final-score').innerHTML = winHtml;
+  };
+// Show the popup.
+  document.getElementById('end-game').classList.remove('hide');
+// Stop timer.
+  window.clearInterval(timerIntervalId);
+// Flip all cards front side up.
+  for (let card=0; card<16; card++){
+    cards[card].classList.remove('back');
+    cards[card].classList.add('front');
   }
 }
 
-function hideHint(putItBack) {
-  for (let c=0; c<16; c++){
-    document.addEventListener('click',flipCard);
-    putItBack.classList.remove('front');
-    putItBack.classList.add('back');
-  }
-  if ((hintLeft)>0) {document.addEventListener('keydown',hint)};
-}
 /*******************************************************************************
   Function for setting or unsetting event on clicks on cards accordind to
   the phase of the game. The function is used to avoid clicks on cards during
@@ -323,6 +387,26 @@ function makeCardsflippable(allowed) {
     };
   }
 }
+
+/*******************************************************************************
+    Shuffle the cards
+    (Generic algorythm found on internet to shuffle a list of objects)
+*******************************************************************************/
+
+function shuffleCards() {
+  for (let card = desk.length-1; card > 0; card--){
+    // pick a random position in the desk
+    let randomCard = Math.floor(Math.random()*(card+1));
+    // swap desk[posion] and desk[rendomPosition]
+    let saveCard = desk[card].textContent;
+    desk[card].textContent = desk[randomCard].textContent;
+    desk[randomCard].textContent = saveCard;
+  };
+}
+
+/*******************************************************************************
+                        Main code for the game
+*******************************************************************************/
 
 /*******************************************************************************
   Game is loaded by html and css, just wait until player click on new game or

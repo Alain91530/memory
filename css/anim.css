@@ -87,7 +87,6 @@
 	left: 0;
 	background: rgba(0,0,0,0.8);
 	z-index: 99999;       /* Put the popup on top */
-  text-align: left;
 }
 
 #message {
@@ -119,13 +118,6 @@
 	display: none;
 }
 
-#result {
-  font-size: 1em;
-  line-height: .1vw;
-	text-align: center;
-  width: 100%;
-}
-
 .emoji{
   max-width: 11vw;
 }
@@ -138,18 +130,13 @@
 
 #result {
   cursor: default;
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0,0,0,0.8);
-	z-index: 99999;       /* Put the popup on top */
-  text-align: left;
+  line-height: .1vw;
+  text-align: center;
+  width: 100%;
 }
 /*******************************************************************************
 
-    Modal popup when game is game is paused
+    Modal popup when game is paused
 
 *******************************************************************************/
 
@@ -161,8 +148,7 @@
   bottom: 0;
   left: 0;
   background: rgba(0,0,0,0.8);
-  z-index: 99999;       /* Put the popup on top */
-  text-align: left;
+  z-index: 99999;                   /* Put the popup on top */
 }
 
 #pause {
@@ -179,9 +165,19 @@
 
 		Breakpoint for portrait orientation.
 
+    In protrait view the "header" with the score and the menu becomes a
+    becomes a "side-bar" in order to keep the game playable.
+    This is made using the position proprty of the flexbox. other changes are
+    only size adaptations with units proportional to the viewport size.
+
 *******************************************************************************/
 
 @media screen and (orientation: portrait) {
+
+	header{
+    order: 0;
+  	max-width: 100%;
+  }
 
 	#deck {
 		width: 75vw;
@@ -204,14 +200,14 @@
 		height: 15vh;
 	}
 
-	header{
-		order: 0;
-		max-width: 100%;
-	}
-
 	.button {
 		font-size: 2.5vh;
 	}
+
+  .card {
+  	width: 16vw;
+  	height: 16vw;
+  }
 
 	.menu {
 		order: 3;
@@ -222,10 +218,6 @@
 		margin-bottom: 1vh;
 	}
 
-	.card {
-		width: 16vw;
-		height: 16vw;
-	}
 	.picture {
 		font-size: 5.5vh;
 		margin-top: 2vh
