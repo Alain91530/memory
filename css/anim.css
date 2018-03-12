@@ -201,8 +201,8 @@
 	#deck {
 		width: 75vw;
 		height: 75vw;
-		max-height: 100%;
-		max-width: 100%;
+		max-height: 480px;
+		max-width: 480px;
 		padding: 10px;
 	}
 
@@ -224,8 +224,8 @@
 	}
 
   .card {
-  	width: 16vw;
-  	height: 16vw;
+  	width: 22%;
+  	height: 22%;
   }
 
 	.menu {
@@ -241,8 +241,8 @@
     font-size: 0.8em;
   }
 	.picture {
-		font-size: 5.5vh;
-		margin-top: 2vh
+    font-size: 4.5vh;
+		margin-top: 2vh;
 	}
 }
 

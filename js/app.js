@@ -291,13 +291,15 @@ else {
     timerIntervalId = window.setInterval(changeTimer, 1000);
 }
 
-// Set an event on a click on timer to pause the game.
+/* Set an event on a click on timer  to pause the game.
+   And and add clickable class to have a changing cusor hover                  */
 
   document.getElementById('time').addEventListener('click',function(){
     window.clearInterval(timerIntervalId);
     document.getElementById('game-paused').classList.remove('hide');
     document.getElementById('game-saved').classList.add('hide');
   });
+  document.getElementById('time').classList.add('clickable');
 
 // Set an event to get a hint when <esc> is pressed.
 
