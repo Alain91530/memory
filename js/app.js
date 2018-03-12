@@ -250,7 +250,7 @@ function notMatchingCards(cardOne,cardTwo){
       - Shuffle the deck
       - Wait until a card is clicked
 *******************************************************************************/
-function startGame() {
+function startGame(restore) {
 
 // Reset the number of cards flipped
   flips = 0;
@@ -277,7 +277,7 @@ function startGame() {
    If it's a new game shuffle and set timer and moves to 0 and start it
    otherwise restore the game and put it in paused mode.                 */
 
-if (localStorage.getItem('saved')=="true") {
+if ((localStorage.getItem('saved')=="true")&&(restore)) {
   restoreGame();
   document.getElementById('game-paused').classList.remove('hide')
 }
@@ -454,8 +454,12 @@ function storeGame() {
   new one.
 *******************************************************************************/
 
-play[0].addEventListener('click', startGame); // Event for the button in game
-play[1].addEventListener('click', startGame); // Event for the button in popup
+play[0].addEventListener('click', function() {
+  startGame(false);
+}); // Event for the button in game
+play[1].addEventListener('click', function() {
+  startGame(true);
+}); // Event for the button in popup
 
 /* Set the event to stop playing after a game. The function on this events
    remove the event on card's click and change the cursor on card's hover     */
@@ -482,10 +486,10 @@ document.getElementById('resume').addEventListener('click', function(){
 document.getElementById('restart').addEventListener('click', function(){
   localStorage.saved = "false";
   document.getElementById('game-paused').classList.add('hide');
-  startGame();
+  startGame(true);
 })
 
 // If a game is stored, start it in paused mode
 if (localStorage.saved=="true") {
-  startGame();
+  startGame(true);
 }
