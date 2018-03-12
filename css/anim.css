@@ -153,13 +153,33 @@
 
 #pause {
   display: flex;
-  flex-flow: column;
+  flex-flow: wrap;
   align-items: center;
+/*  justify-content: space-around;*/
   max-width: 45vw;
   margin: 10% auto 3vh;
   padding: 5px 20px 13px 20px;
   border-radius: 10px;
   background: linear-gradient(#fff, #d9bea6);
+  text-align: center;
+}
+
+#game-saved {
+  margin-top: 0;
+  text-align: center;
+  width: 100%;
+}
+#resume {
+  width: 50%;
+  margin-bottom: 2vh;
+}
+
+#restart {
+  width: 50%;
+  margin-bottom: 2vh;
+}
+#pause-message {
+  width: 100%;
 }
 /*******************************************************************************
 
