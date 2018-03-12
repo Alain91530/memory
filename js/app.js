@@ -184,6 +184,7 @@ function flipCard(card) {
     // next card flipped and toggle the cursor change on hover to not clickable
     else {
       firstCard = card.target;
+      // Store the index of firstCard in Cards conveted in an array first
       localStorage.setItem('firstCard',Array.from(cards).indexOf(firstCard))
       card.target.classList.toggle('clickable');
     };
@@ -314,25 +315,7 @@ else {
 
   makeCardsflippable(true);
 }
-function restoreGame() {
-  timer = localStorage.getItem('timer');
-  flips = localStorage.getItem('flips');
-  hintLeft = localStorage.getItem('hintLeft');
 
-  document.getElementById('deck').innerHTML = JSON.parse(localStorage.getItem('deck'));
-  firstCard = cards[localStorage.getItem('firstCard')];
-
-}
-
-function storeGame() {
-  localStorage.setItem('saved',true);
-  localStorage.setItem('timer', timer);
-
-  localStorage.setItem('flips',flips);
-  localStorage.setItem('hintLeft',hintLeft);
-
-  localStorage.setItem('deck',JSON.stringify(document.getElementById('deck').innerHTML));
-}
 /*******************************************************************************
   Functions to be called for repetitive actions of the logic of the Game
 
@@ -416,6 +399,19 @@ function makeCardsflippable(allowed) {
 }
 
 /*******************************************************************************
+    Restore a former game when arriving to the game after a refresh or reopening
+    of the browser.
+*******************************************************************************/
+
+function restoreGame() {
+  timer = localStorage.getItem('timer');
+  flips = localStorage.getItem('flips');
+  hintLeft = localStorage.getItem('hintLeft');
+  document.getElementById('deck').innerHTML = JSON.parse(localStorage.getItem('deck'));
+  firstCard = cards[localStorage.getItem('firstCard')];
+}
+
+/*******************************************************************************
     Shuffle the cards
     (Generic algorythm found on internet to shuffle a list of objects)
 *******************************************************************************/
@@ -429,6 +425,22 @@ function shuffleCards() {
     deck[card].textContent = deck[randomCard].textContent;
     deck[randomCard].textContent = saveCard;
   };
+}
+
+/*******************************************************************************
+    Store current game in local storage
+    firstcard isn't stored but only when it changes i.e. in the flipCard
+    function.
+    Note: This function is called a first time by startGame then every second by
+    changeTimer.
+*******************************************************************************/
+
+function storeGame() {
+  localStorage.setItem('saved',true);
+  localStorage.setItem('timer', timer);
+  localStorage.setItem('flips',flips);
+  localStorage.setItem('hintLeft',hintLeft);
+  localStorage.setItem('deck',JSON.stringify(document.getElementById('deck').innerHTML));
 }
 
 /*******************************************************************************
