@@ -63,15 +63,62 @@
 *                                                                            *
 *               Udacity FEND Project #3: Memory game                         *
 *                                                                            *
+* This project produce a memory game on a web page.                          *
+* Rules of the game are very simple. The player has a deck of 16 cazrds put  *
+* face down. Each card show a picture and they are 8 pairs of pictures.      *
+* The aim of the game is to find all pairs in a limited number of moves (16).*
+* flipping 2 cards counts as 1 move.                                         *
+* If the 2 flipped cards match they stay face up, if not they are flipped    *
+* back again.                                                                *
+* The player wins when all cards are face up.                                *
+*                                                                            *
+* This file sets the responsive design of the game.                          *
+*                                                                            *
+*   The structure of the design is:                                          *
+*                                                                            *
+*           main                                                             *
+*             header (the header is actually a right side bar on landscape   *
+*                     screens to have a playable gmae on small devices)      *
+*               title                                                        *
+*               score                                                        *
+*               menu (included in the menu there is a modal popup for rules) *
+*             game                                                           *
+*               deck                                                         *
+*                 16 cards                                                   *
+*             popup for end of game                                          *
+*             popup for pused game                                           *
+*                                                                            *
+* Appart from the main logic of the game, this one adds some extra Features  *
+*   - Animations when cards are flipped                                      *
+*   - hint when esc key is pressed (3 hints max per game)                    *
+*   - game pused when player click on the timer                              *
+*   - game is stored every second in local storage. When a player comes back *
+*     on the page game he can resume the game where he left it, even if the  *
+*     browser was closed meanwhile                                           *
+*                                                                            *
+* Requirements:                                                              *
+*   Local files: css/styles.css (design of the game board)                   *
+*                css/anim.css (animations, modal popups and @media queries)  *
+*                js/app.js (script of the game)                              *
+*                img (directory for all images)                              *
+*                fonts/animals.ttf (font used for the icon images on cards)  *
+*   Remote files: awesome font at maxcdn.com                                 *
+*                 ubuntu google font                                         *
 *                                                                            *
 ***************************************************************************-->
 <body>
 
   <main>
     <header>
+
+      <!-- Title of the game and page   -->
+
       <section id="game-title">
         <h1>Memory Game</h1>
       </section>
+
+      <!-- Score pannel                 -->
+
       <div id="score">
         <div id="stars" class="pannel">
             <i class="fa fa-minus"></i>
@@ -85,6 +132,9 @@
             00h03m42s
         </div>
       </div>
+
+      <!-- Menu area                    -->
+
       <section id="menu">
         <div class="start-over clickable">
             <span title="Start new game" class="button">New game</span>
@@ -130,6 +180,8 @@
         </div>
       </section>
     </header>
+
+    <!--  Game area                    -->
 
     <div id="game">
         <section id="deck">
@@ -185,6 +237,8 @@
     </div>
   </main>
 
+  <!--   Modal end of game popUp (initialised with game lost)       -->
+
   <section id="end-game" class="hide">
     <div id="message">
       <div id="result">
@@ -204,6 +258,8 @@
       </div>
     </div>
   </section>
+
+  <!--   Modal popup  for paused game                              -->
 
   <section id="game-paused" class="hide">
     <div id="pause">

@@ -46,6 +46,11 @@ main {
 /*******************************************************************************
 *		Ids																																				 *
 *******************************************************************************/
+
+/* The deck of the game
+	 responsive using flexbox and justify-content to always have some spacing
+	 between cards																															*/
+
 #deck {
   align-self: center;
   align-items: center;
@@ -75,6 +80,8 @@ main {
 	height: 0;
 }
 
+/* Menu part of the design	*/
+
 #menu {
 	display: flex;
 	flex-flow: wrap;
@@ -85,6 +92,8 @@ main {
 #moves {
 	width: 100%;
 }
+
+/* Score pannel	*/
 
 #score {
 	border-top-style: solid;
@@ -121,6 +130,10 @@ main {
 	width: 80%;
 }
 
+.button:hover {
+	background-color: #ffe0b2;
+}
+
 .end-button {
   background-color: #ff9800;
   border-color: #310;
@@ -138,6 +151,11 @@ main {
 	background-color: #ffe0b2;
 }
 
+/* Cards of the game
+		Image is a character of an iconic font
+		background-color will be used for animation and matching or not matching
+		cards.																																		*/
+
 .card {
   color: brown;
   font-family: "animals",sans-serif;
@@ -151,28 +169,30 @@ main {
 }
 
 .clickable {
-  cursor: pointer;							/* Element is clickable												*/
+  cursor: pointer;							/* point changes on hover											*/
 }
 
-.front {
+.front {												/* color of a front face card 								*/
   background-color: orange;
 }
 
-.back {
+.back {													/* image of the back of cards									*/
   background-image: url("../img/card.svg");
   }
 
-.back > h2 {
+.back > h2 {										/* hide the text (pic) when card is backside	*/
   visibility: hidden;
 }
 
-.matching {
+.matching {											/* color of a matching pair										*/
 	background-color: lightgreen;
 }
 
-.notMatching {
+.notMatching {									/* color of a non matching pair								*/
 	background-color: #faa;
 }
+
+/* Design of score informations																								*/
 
 .pannel {
   background-color: #ffca28;
@@ -185,6 +205,7 @@ main {
   padding-top: .1em;
 	width: 100%;
 }
+/* responsive disign of the char (pic) of the cards.													*/
 
 .picture {
   font-size: 4.5vw;
