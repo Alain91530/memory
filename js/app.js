@@ -456,11 +456,17 @@ document.querySelector('.stop').addEventListener('click', function() {
     };
 });
 
-// Set an event to resume game after pausing by clicking on timer
+// Set an event to resume or restart game after pausing by clicking on timer
 
 document.getElementById('resume').addEventListener('click', function(){
   timerIntervalId = window.setInterval(changeTimer, 1000);
   document.getElementById('game-paused').classList.add('hide');
+})
+
+document.getElementById('restart').addEventListener('click', function(){
+  localStorage.saved = "false";
+  document.getElementById('game-paused').classList.add('hide');
+  startGame();
 })
 
 // If a game is stored, start it in paused mode
