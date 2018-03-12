@@ -456,7 +456,7 @@ document.querySelector('.stop').addEventListener('click', function() {
     };
 });
 
-// Set an event to resume or restart game after pausing by clicking on timer
+// Set events to resume or restart game after pausing by clicking on timer
 
 document.getElementById('resume').addEventListener('click', function(){
   timerIntervalId = window.setInterval(changeTimer, 1000);

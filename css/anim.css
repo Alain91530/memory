@@ -237,6 +237,9 @@
 		margin-bottom: 1vh;
 	}
 
+  .popUp {
+    font-size: 0.8em;
+  }
 	.picture {
 		font-size: 5.5vh;
 		margin-top: 2vh
