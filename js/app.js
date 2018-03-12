@@ -184,6 +184,7 @@ function flipCard(card) {
     // next card flipped and toggle the cursor change on hover to not clickable
     else {
       firstCard = card.target;
+      localStorage.setItem('firstCard',Array.from(cards).indexOf(firstCard))
       card.target.classList.toggle('clickable');
     };
   };
@@ -315,11 +316,12 @@ else {
 }
 function restoreGame() {
   timer = localStorage.getItem('timer');
-  firstCard = localStorage.getItem('firstCard');
   flips = localStorage.getItem('flips');
   hintLeft = localStorage.getItem('hintLeft');
 
   document.getElementById('deck').innerHTML = JSON.parse(localStorage.getItem('deck'));
+  firstCard = cards[localStorage.getItem('firstCard')];
+
 }
 
 function storeGame() {
