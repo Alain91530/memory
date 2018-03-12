@@ -295,7 +295,8 @@ else {
 
   document.getElementById('time').addEventListener('click',function(){
     window.clearInterval(timerIntervalId);
-    document.getElementById('game-paused').classList.remove('hide')
+    document.getElementById('game-paused').classList.remove('hide');
+    document.getElementById('game-saved').classList.add('hide');
   });
 
 // Set an event to get a hint when <esc> is pressed.
@@ -317,12 +318,6 @@ function restoreGame() {
   hintLeft = localStorage.getItem('hintLeft');
 
   document.getElementById('deck').innerHTML = JSON.parse(localStorage.getItem('deck'));
-  //  Table containing the complete html elements of the cards of the deck
-//  cards = localStorage.getItem('cards');
-  //  Elements for the score board (time, moves and stars)
-//  timerScore = JSON.parse(localStorage.getItem('timerScore'));
-//  moveScore = JSON.parse(localStorage.getItem('moveScore'));
-//  stars = JSON.parse(localStorage.getItem('stars'));
 }
 
 function storeGame() {
@@ -333,14 +328,6 @@ function storeGame() {
   localStorage.setItem('hintLeft',hintLeft);
 
   localStorage.setItem('deck',JSON.stringify(document.getElementById('deck').innerHTML));
-//  localStorage.setItem('cards',cards);
-  //  Elements for the score board (time, moves and stars)
-//  localStorage.setItem('timerScore',document.getElementById('timerScore').innerHTML);
-//  localStorage.setItem('moves',document.getElementById('moves').innerHTML);
-//  localStorage.setItem('stars',document.getElementById('stars').innerHTML);
-//  localStorage.setItem('moveScore',moveScore);
-//  localStorage.setItem('stars',stars);
-
 }
 /*******************************************************************************
   Functions to be called for repetitive actions of the logic of the Game
@@ -471,7 +458,7 @@ document.querySelector('.stop').addEventListener('click', function() {
 
 // Set an event to resume game after pausing by clicking on timer
 
-document.getElementById('restart').addEventListener('click', function(){
+document.getElementById('resume').addEventListener('click', function(){
   timerIntervalId = window.setInterval(changeTimer, 1000);
   document.getElementById('game-paused').classList.add('hide');
 })
