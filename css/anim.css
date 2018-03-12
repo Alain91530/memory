@@ -223,6 +223,7 @@
 		margin-top: 2vh
 	}
 }
+
 /*******************************************************************************
 
 		keyframe animation for non matching shuffleCards
@@ -244,6 +245,12 @@
 	from {color: lightgreen;}
   to {color: brown;}
 }
+
+/*******************************************************************************
+
+		keyframe animation for matching shuffleCards
+
+*******************************************************************************/
 
 .matching {
   animation-iteration-count: 1;

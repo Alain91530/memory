@@ -271,30 +271,25 @@ function startGame() {
     cards[card].classList.add('clickable');       // and the change cursor  over
     };
 
-// Shuffle the card deck
+/* Shuffle or restore the card deck.
+   If it's a new game shuffle and set timer and moves to 0 and start it
+   otherwise restore the game and put it in paused mode.                 */
 
+if (localStorage.getItem('saved')=="true") {
+  restoreGame();
+  document.getElementById('game-paused').classList.remove('hide')
+}
+else {
+  storeGame();
   shuffleCards();
-
-// Set an event listener for the click on the cards.
-
-  makeCardsflippable(true);
-
-// Reset the timer if any was running and start a new one
-
   timer = 0;
-
-// Stop the timer if it isn't the first game
-
-  if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
-
-// Start a timer each second pointing to the function wich increase time played
-
-  timerIntervalId = window.setInterval(changeTimer, 1000);
-
-// Reset time and moves to 0 score display and remove modal popup if any.
-
   moveScore.textContent = "Moves: 0";
   timerScore.textContent = "00h00m00s";
+  // Stop the timer if it isn't 1st of session, to avoid to have more than 1
+  if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
+  // Start a timer each second pointing to the function wich increase time played
+    timerIntervalId = window.setInterval(changeTimer, 1000);
+}
 
 // Set an event on a click on timer to pause the game.
 
@@ -311,16 +306,9 @@ function startGame() {
 
   document.getElementById('end-game').classList.add('hide');
 
-// Store the game in local storage
+// Set an event listener for the click on the cards.
 
-  if (localStorage.getItem('saved')=="true") {
-    restoreGame();
-    makeCardsflippable(true);
-  }
-  else {
-    storeGame();
-    makeCardsflippable(true);
-  }
+  makeCardsflippable(true);
 }
 function restoreGame() {
   timer = localStorage.getItem('timer');
@@ -411,6 +399,8 @@ function endGame(win) {
     cards[card].classList.remove('back');
     cards[card].classList.add('front');
   }
+// Set local storage to no pending game stored
+  localStorage.setItem('saved', false);
 }
 
 /*******************************************************************************
@@ -485,3 +475,8 @@ document.getElementById('restart').addEventListener('click', function(){
   timerIntervalId = window.setInterval(changeTimer, 1000);
   document.getElementById('game-paused').classList.add('hide');
 })
+
+// If a game is stored, start it in paused mode
+if (localStorage.saved=="true") {
+  startGame();
+}
