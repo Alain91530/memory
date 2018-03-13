@@ -41,7 +41,7 @@ Modal popups have been designed with 2 different methods:
 * End of game popup CSS and JavaScript.
 
 ### Documentation ###
-Detailed documentation of the project in <a href="https://github.com/Alain91530/memory/blob/master/documentation.md">DOCUMENTATION.MD</a>
+Detailed documentation of the project in <a href="https://github.com/Alain91530/memory/blob/master/docs/DOCUMENTATION.md">DOCUMENTATION.MD</a>
 
 ### Author ###
 Alain CADENAT
