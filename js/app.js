@@ -2,6 +2,16 @@
 
     Variables
 *******************************************************************************/
+
+// Differents stages of the game set as constants to be easy to change.
+
+const maxFlips = 32;
+const oneStar = 24;
+const twoStars = 16;
+
+// New game and restart button
+const play = document.getElementsByClassName('start-over');
+
 let timer = 0;           // Number of seconds ellapsed playing a game
 let firstCard;           // Variable used to store the node of the first card
 let timerIntervalId = 0; // Store the value returned by setInterval
@@ -11,19 +21,15 @@ let hintLeft = 3;
 /*  Table containing the deck. It's filled with pairs of html elements
     representing the value of the eight pairs of different cards              */
 let deck = document.getElementsByClassName('picture');
+
 //  Table containing the complete html elements of the cards of the deck
 let cards = document.getElementsByClassName('card');
+
 //  Elements for the score board (time, moves and stars)
 let timerScore = document.getElementById('time');
 let moveScore = document.getElementById('moves');
 let stars = document.getElementsByClassName('fa');
 
-// Differents stages of the game set as constants to be easy to change.
-const maxFlips = 32;
-const oneStar = 24;
-const twoStars = 16;
-
-const play = document.getElementsByClassName('start-over');
 
 /*******************************************************************************
 
@@ -34,7 +40,8 @@ const play = document.getElementsByClassName('start-over');
 
     - changeTimer():
         called every second when game is started Add one second to timer,
-        format and Display ellaped time in score pannel.
+        format and Display ellaped time in score pannel. The timer is also used
+        to auto-store the game every second.
 
     - flipCard(card):
         Action: flip the clicked card and do all need checks accordind to the
@@ -43,7 +50,7 @@ const play = document.getElementsByClassName('start-over');
 
     - hideHint(putItBack):
         Action: Put a card back face up after a hint. It's called by a timer
-        in order to give some delay to the player to see the hint. If hint are
+        in order to give some delay to the player to see the hint. If hint is
         still allowed, the proper event is added back.
         Parameter:
           putItBack: the DOM element of the card to be put back face up.
@@ -69,7 +76,7 @@ const play = document.getElementsByClassName('start-over');
             - Event to pause the game on click of the timer.
             - Event to show a hint.
         Parameter:
-          restore: boolean telling is restoring game has to be done or not
+          restore: boolean telling restoring game has to be done or not
           if we enter the fonction from a click or a load of the game's page.
 
 /*******************************************************************************
@@ -106,7 +113,7 @@ function changeTimer() {
   };
   timer++;
 
-// Change the DOM to display the timet value
+// Change the DOM to display the time value
 
   timerScore.textContent = hrs+mins+secs;
 
@@ -191,11 +198,9 @@ function flipCard(card) {
 *******************************************************************************/
 
 function hideHint(putItBack) {
-  for (let c=0; c<16; c++){
-    document.addEventListener('click',flipCard);
-    putItBack.classList.remove('front');
-    putItBack.classList.add('back');
-  }
+  makeCardsflippable(true);
+  putItBack.classList.remove('front');
+  putItBack.classList.add('back');
   if ((hintLeft)>0) {document.addEventListener('keydown',hint)};
 }
 
@@ -214,9 +219,7 @@ function hint(e){
     hintCard.classList.add('front');
     hintCard.classList.remove('back');
     document.removeEventListener('keydown',hint);
-    for (let c=0; c<16; c++){
-      document.removeEventListener('click', flipCard);
-    }
+    makeCardsflippable(false);
     hintLeft--;
     setTimeout(hideHint, 1000, hintCard);
   }
@@ -270,32 +273,35 @@ function startGame(restore) {
    If it's a new game shuffle and set timer and moves to 0 and start it
    otherwise restore the game and put it in paused mode.                 */
 
-if ((localStorage.getItem('saved')=="true")&&(restore)) {
-  restoreGame();
-  moveScore.textContent = "Moves: "+Math.trunc(flips/2);
-  displayStars();
-  document.getElementById('game-paused').classList.remove('hide');
-}
-else {
-  storeGame();
-  shuffleCards();
-  timer = 0;
-  moveScore.textContent = "Moves: 0";
-  timerScore.textContent = "00h00m00s";
-  // Stop the timer if it isn't 1st of session, to avoid to have more than 1
-  if(timerIntervalId != 0) {window.clearInterval(timerIntervalId);}
-  // Start a timer each second pointing to the function wich increase time played
-    timerIntervalId = window.setInterval(changeTimer, 1000);
-}
+  if ((localStorage.getItem('saved')=="true")&&(restore)) {
+    restoreGame();
+    moveScore.textContent = "Moves: "+Math.trunc(flips/2);
+    displayStars();
+    document.getElementById('game-paused').classList.remove('hide');
+  }
+  else {
+    storeGame();
+    shuffleCards();
+    timer = 0;
+    moveScore.textContent = "Moves: 0";
+    timerScore.textContent = "00h00m00s";
+    // Stop the timer if it isn't 1st of session, to avoid to have more than 1
+    if(timerIntervalId != 0) {
+      window.clearInterval(timerIntervalId);
+    };
+    // Start a timer each second pointing to the function wich increase time played
+      timerIntervalId = window.setInterval(changeTimer, 1000);
+    };
 
 /* Set an event on a click on timer  to pause the game.
    And and add clickable class to have a changing cusor hover                  */
 
   document.getElementById('time').addEventListener('click',function(){
-    window.clearInterval(timerIntervalId);
-    document.getElementById('game-paused').classList.remove('hide');
-    document.getElementById('game-saved').classList.add('hide');
-  });
+      window.clearInterval(timerIntervalId);
+      document.getElementById('game-paused').classList.remove('hide');
+      document.getElementById('game-saved').classList.add('hide');
+    }
+  );
   document.getElementById('time').classList.add('clickable');
 
 // Set an event to get a hint when <esc> is pressed.

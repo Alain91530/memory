@@ -7,9 +7,9 @@ The player wins when all cards are face up.
 ## 2. Design ##
 The game is full responsive and can be played on moblie phones, tablets and desktops.
 The choice has been made of 2 differant layout fitting the best for different orientation of the screen.
-<center>![landscape](docs/img/landscape.jpg)
+<center>![landscape](img/landscape.jpg)
 
-<center>![protrait](docs/img/portrait.jpg)
+<center>![protrait](img/portrait.jpg)
 
 ## 3. Features of this realisation ##
 This realisation adds a few features compared to a basic realisation.  
@@ -23,16 +23,16 @@ __Animations__: During the game some animations are displayed for compatible bro
 ## 4. Realisation ##
 The project is realised whith one html page using css to setup the layout and JavaScript for the logic of the game.
 The directory tree for files is as follow:
-![directory tree](docs/img/directory-tree.svg)
+![directory tree](img/directory-tree.svg)
 ### 4.1 DOM's Structure ###
-![Main Algorythm](docs/img/dom.png)
+![Main Algorythm](img/dom.png)
 
 ### 4.2 Algorythms used ###
 #### 4.2.1  Main algorythm ####
-![Main Algorythm](docs/img/main-flowchart.svg)
+![Main Algorythm](img/main-flowchart.svg)
 #### 4.2.2 Flip card algorytm ####
 This function called at a click event on a card is the heart of the game and manage the most important part of the game's logic.
-![Flipcard Algorythm](docs/img/flipcard.svg)
+![Flipcard Algorythm](img/flipcard.svg)
 ### 4.3 Code ###
 #### 4.3.1 Global constants and variables #####
 Constants:

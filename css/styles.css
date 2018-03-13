@@ -12,15 +12,13 @@
 body {
   background-image: url("../img/wood1.jpg");
   /* Credit for background image
-     https://pixabay.com/fr/bois-patron-%C3%A9tage-texture-arbre-150384/ */
-
+     https://pixabay.com        */
 	cursor: default;							 /* always an arrow on non clickable elements */
-
+	display: flex;								 /* flexbox for responsiveness								*/
+	flex-wrap: wrap;
   font-family: 'Ubuntu', sans-serif;
 	height: 100vh;
 	margin: 0;
-	display: flex;								 /* flexbox for responsiveness								*/
-	flex-wrap: wrap;
 }
 
 header {
@@ -61,11 +59,11 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 3vh;
-  margin: auto;
+	margin: auto;
 	/* Square responsive deck			*/
-  max-width: 41vw;
-  min-height: 41vw;
+	max-width: 41vw;
+	min-height: 41vw;
+  padding: 3vh;
 }
 
 #game {

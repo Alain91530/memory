@@ -71,12 +71,31 @@
 .close:hover {
  background: #d9bea6;
 }
+/*******************************************************************************
+
+    Common classes for end of game and paused game popup
+
+*******************************************************************************/
+
+
+.hide {
+	display: none;
+}
 
 /*******************************************************************************
 
 		Modal popup for the end of the game
 
 *******************************************************************************/
+
+
+#end-choice {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  margin: auto;
+  width: 70vw;
+}
 
 #end-game {
   cursor: default;
@@ -87,6 +106,12 @@
 	left: 0;
 	background: rgba(0,0,0,0.8);
 	z-index: 99999;       /* Put the popup on top */
+}
+
+#final-score {
+  font-size: 0.7em;
+  line-height: 0.5vw;
+  text-align: center;
 }
 
 #message {
@@ -100,22 +125,11 @@
 	background: linear-gradient(#fff, #d9bea6);
 }
 
-#end-choice {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: space-between;
-  margin: auto;
-  width: 70vw;
-}
-
-#final-score {
-  font-size: 0.7em;
-  line-height: 0.5vw;
+#result {
+  cursor: default;
+  line-height: .1vw;
   text-align: center;
-}
-
-.hide {
-	display: none;
+  width: 100%;
 }
 
 .emoji{
@@ -128,12 +142,7 @@
   width: 33%;
 }
 
-#result {
-  cursor: default;
-  line-height: .1vw;
-  text-align: center;
-  width: 100%;
-}
+
 /*******************************************************************************
 
     Modal popup when game is paused
@@ -163,6 +172,10 @@
   text-align: center;
 }
 
+#pause-message {
+  width: 100%;
+}
+
 #game-saved {
   margin-top: 0;
   text-align: center;
@@ -176,9 +189,6 @@
 #restart {
   width: 50%;
   margin-bottom: 2vh;
-}
-#pause-message {
-  width: 100%;
 }
 /*******************************************************************************
 
@@ -237,13 +247,14 @@
 		margin-bottom: 1vh;
 	}
 
-  .popUp {
-    font-size: 0.8em;
-  }
-	.picture {
+  .picture {
     font-size: 4.5vh;
 		margin-top: 2vh;
 	}
+
+  .popUp {
+    font-size: 0.8em;
+  }
 }
 
 /*******************************************************************************
@@ -263,16 +274,16 @@
 	animation-name: flip;
 }
 
-@keyframes matchflip {
-	from {color: lightgreen;}
-  to {color: brown;}
-}
-
 /*******************************************************************************
 
 		keyframe animation for matching shuffleCards
 
 *******************************************************************************/
+
+@keyframes matchflip {
+	from {color: lightgreen;}
+  to {color: brown;}
+}
 
 .matching {
   animation-iteration-count: 1;
