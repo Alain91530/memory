@@ -1,3 +1,32 @@
+/*******************************************************************************
+
+    Common classes for all popups
+
+*******************************************************************************/
+
+.hide {
+	display: none;
+}
+
+.modal-popup {
+  cursor: default;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+}
+
+.popup-content {
+  display: flex;
+	flex-flow: wrap;
+  margin: 10% auto 3vh;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: linear-gradient(#fff, #d9bea6);
+
+}
 
 /*******************************************************************************
 
@@ -16,15 +45,7 @@
       - Black background with transparency
       - no effect on clicked                    */
 
-.popUp {
-  cursor: default;
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0,0,0,0.8);
-	z-index: 99999;       /* Put the popup on top */
+.pop-up {
 	opacity:0;            /* Hide popUp           */
 	transition: opacity 400ms ease-in;
   text-align: left;
@@ -34,14 +55,14 @@
 /*  Pseudo class to display the popup when link
     is clicked                                  */
 
-.popUp:target {
+.pop-up:target {
 	opacity:1;             /* Display popUp       */
 	pointer-events: all;  /* click action normal */
 }
 
 /*  Design of the text box                      */
 
-.popUp > div {
+.pop-up > div {
 	max-width: 70%;
 	position: relative;
 	margin: 10% auto;
@@ -71,16 +92,6 @@
 .close:hover {
  background: #d9bea6;
 }
-/*******************************************************************************
-
-    Common classes for end of game and paused game popup
-
-*******************************************************************************/
-
-
-.hide {
-	display: none;
-}
 
 /*******************************************************************************
 
@@ -97,16 +108,6 @@
   width: 70vw;
 }
 
-#end-game {
-  cursor: default;
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0,0,0,0.8);
-	z-index: 99999;       /* Put the popup on top */
-}
 
 #final-score {
   font-size: 0.7em;
@@ -115,14 +116,9 @@
 }
 
 #message {
-	display: flex;
-	flex-flow: wrap;
   justify-content: center;
 	max-width: 70vw;
-	margin: 10% auto 3vh;
-	padding: 5px 20px 13px 20px;
-	border-radius: 10px;
-	background: linear-gradient(#fff, #d9bea6);
+
 }
 
 #result {
@@ -149,26 +145,9 @@
 
 *******************************************************************************/
 
-#game-paused {
-  cursor: default;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 99999;                   /* Put the popup on top */
-}
-
 #pause {
-  display: flex;
-  flex-flow: wrap;
   align-items: center;
   max-width: 45vw;
-  margin: 10% auto 3vh;
-  padding: 5px 20px 13px 20px;
-  border-radius: 10px;
-  background: linear-gradient(#fff, #d9bea6);
   text-align: center;
 }
 
