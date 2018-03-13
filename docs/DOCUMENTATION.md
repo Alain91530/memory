@@ -7,9 +7,9 @@ The player wins when all cards are face up.
 ## 2. Design ##
 The game is full responsive and can be played on moblie phones, tablets and desktops.
 The choice has been made of 2 differant layout fitting the best for different orientation of the screen.
-<center>![landscape](img/landscape.jpg)
+<center> <img src="img/landscape.jpg">
 
-<center>![protrait](img/portrait.jpg)
+<center>!<img src="img/portrait.jpg">
 
 ## 3. Features of this realisation ##
 This realisation adds a few features compared to a basic realisation.  

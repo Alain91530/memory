@@ -10,7 +10,7 @@ up. Otherwise cards flip back face down.
 A timer shows how long you have been playing. Clicking on the
 timer pauses the game.  
 You win when all cards are face up.  
-<center>![landscape](docs/img/landscape.jpg)
+<center><img src="docs/img/landscape.jpg">
 
 
 Features of the gameplay:
