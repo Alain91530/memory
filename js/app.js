@@ -41,18 +41,14 @@ const play = document.getElementsByClassName('start-over');
         game logic (see comments before the function for details).
         Parameter: the DOM element clicked returned by the event.
 
-    - notMatchingCards(cardOne,cardTwo):
-        called to flip on the back side a non matching pair of cards. A time
-        count is needed in order to let the animation goes to its end.
-
-    - function hideHint(putItBack):
+    - hideHint(putItBack):
         Action: Put a card back face up after a hint. It's called by a timer
         in order to give some delay to the player to see the hint. If hint are
         still allowed, the proper event is added back.
         Parameter:
           putItBack: the DOM element of the card to be put back face up.
 
-    - function hint(e):
+    - hint(e):
         Action: fip a random back face card to front for 1 to 2 seconds to give
         a hint to player. On exit set a time out to hide the hint. Decrease the
         number of allowed hint.
@@ -60,7 +56,11 @@ const play = document.getElementsByClassName('start-over');
           e: keyboard event wich called it, used to retrieve the stroked key and
           display the hint or not.
 
-    - startGame():
+    - notMatchingCards(cardOne,cardTwo):
+        called to flip on the back side a non matching pair of cards. A time
+        count is needed in order to let the animation goes to its end.
+
+    - startGame(restore):
         Event listener for clicks on the play button in main window or in modal
         popup at the end of the game. It initialize everything to have a clean
         shuffled deck and then set up the logic of the game:
@@ -68,6 +68,9 @@ const play = document.getElementsByClassName('start-over');
             - Interval for the timer.
             - Event to pause the game on click of the timer.
             - Event to show a hint.
+        Parameter:
+          restore: boolean telling is restoring game has to be done or not
+          if we enter the fonction from a click or a load of the game's page.
 
 /*******************************************************************************
   Function called every second which format the string to display
@@ -159,9 +162,14 @@ function flipCard(card) {
       if (card.target.querySelector('h2').textContent==firstCard.querySelector('h2').textContent) {
         card.target.classList.add('matching');
         firstCard.classList.add('matching')
-        // Checking if it's the las pair we need to win
+        // Checking if it's the last pair we need to win
         if (document.getElementsByClassName('matching').length==16){
           setTimeout(endGame(true),1700);
+        }
+        else {
+          if(flips==maxFlips){
+            setTimeout(endGame(false),1700);
+          };
         };
       }
       // Current pair doesn't match
@@ -178,7 +186,6 @@ function flipCard(card) {
           setTimeout(endGame(false),1700);
         };
       };
-
     }
     // It was the 1st card of a move just store it to be able to compare it to
     // next card flipped and toggle the cursor change on hover to not clickable
@@ -190,6 +197,7 @@ function flipCard(card) {
     };
   };
 }
+
 
 /*******************************************************************************
     Function to hide a hint avec a short delay
@@ -279,6 +287,7 @@ function startGame(restore) {
 
 if ((localStorage.getItem('saved')=="true")&&(restore)) {
   restoreGame();
+  moveScore.textContent = "Moves: "+Math.trunc(flips/2);
   document.getElementById('game-paused').classList.remove('hide')
 }
 else {
@@ -331,9 +340,25 @@ else {
       Parameter: allowed
         Boolean, true the cards are clickble, false they aren't.
 
+    restoreGame():
+      Restore the game in the local storage. Local storage stores only strings
+      and data store are adapted to that. The structure of data store is:
+        - saved: 'true' if a game is saved, 'false' otherwise.
+        - timer: string whiche is diplayed by timer element.
+        - flips: flips variable conveted to string.
+        - hintLeft: hintLeft variable convetedto sting.
+        - deck: desk variable conveted to string using JSON.stringify.
+        - firstCard: value of this index of firstCard in cards converted to
+                     string.
+
     shuffleCards():
       generic function to shuffle any object which can be enumarated.
       algorythm was found on the net on several website.
+
+    storeGame():
+      Store the game in the local storage. See restoreGame() for a description
+      of the data.
+
 *******************************************************************************/
 
 /*******************************************************************************
