@@ -21,7 +21,8 @@ Features of the gameplay:
 * Autosave of the current game in local storage
 * Choice of restarting or resuming a game after a pause, the game window or tab closed or a refresh of the game window or tab.
 
-
+### version
+__V1.0__ 03/13/2018
 ### Installation ###
 Clone repository or download files. Then open index.html in your browser. or just <a href="https://alain91530.github.io/projects/memory/index.html">play here</a>
 

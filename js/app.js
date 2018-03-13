@@ -1,8 +1,8 @@
 /*******************************************************************************
 
-    Variables
+    Constants and variables
 *******************************************************************************/
-
+// Contants:
 // Differents stages of the game set as constants to be easy to change.
 
 const maxFlips = 32;
@@ -11,6 +11,8 @@ const twoStars = 16;
 
 // New game and restart button
 const play = document.getElementsByClassName('start-over');
+
+// Variables:
 
 let timer = 0;           // Number of seconds ellapsed playing a game
 let firstCard;           // Variable used to store the node of the first card
@@ -80,7 +82,8 @@ let stars = document.getElementsByClassName('fa');
           if we enter the fonction from a click or a load of the game's page.
 
 /*******************************************************************************
-  Function called every second which format the string to display
+  Function called every second which format the string to display and store the
+  game in local storage.
 *******************************************************************************/
 
 function changeTimer() {
@@ -192,7 +195,7 @@ function flipCard(card) {
 
 
 /*******************************************************************************
-    Function to hide a hint avec a short delay
+    Function to hide a hint with a short delay.
     If the number max of hints is reached the event to display hints is not set
     again.
 *******************************************************************************/
@@ -205,10 +208,10 @@ function hideHint(putItBack) {
 }
 
 /*******************************************************************************
-  Event listener on stroke of <esc> key
-  Flip a random card in thos which are still face down for 1 to 2 seconds
-  Cards are made unclickable during that (event removed, cursor change disable)
-  in order to avoid any problem in the game logic.
+    Event listener on stroke of <esc> key
+    Flip a random card in thos which are still face down for 1 to 2 seconds
+    Cards are made unclickable during that (event removed, cursor change disable)
+    in order to avoid any problem in the game logic.
 *******************************************************************************/
 
 function hint(e){
@@ -244,6 +247,7 @@ function notMatchingCards(cardOne,cardTwo){
 /*******************************************************************************
     Start the game:
       - Shuffle the deck
+      - Set event needed
       - Wait until a card is clicked
 *******************************************************************************/
 function startGame(restore) {
@@ -291,7 +295,7 @@ function startGame(restore) {
     };
     // Start a timer each second pointing to the function wich increase time played
       timerIntervalId = window.setInterval(changeTimer, 1000);
-    };
+  };
 
 /* Set an event on a click on timer  to pause the game.
    And and add clickable class to have a changing cusor hover                  */
@@ -425,11 +429,12 @@ function endGame(win) {
 }
 
 /*******************************************************************************
-  Function for setting or unsetting event on clicks on cards accordind to
-  the phase of the game. The function is used to avoid clicks on cards during
-  animations.
-  If "allowed" is true thi envent is set on all cards of the deck.
-  If "allowed" is false the event is removed.
+    Function for setting or unsetting event on clicks on cards accordind to
+    the phase of the game. The function is used to avoid clicks on cards during
+    animations.
+    If "allowed" is true this event is set on all cards of the deck.
+    If "allowed" is false the event is removed. Function flipCard() will check if
+    a card is not already face up and do nothing in that case.
 *******************************************************************************/
 
 function makeCardsflippable(allowed) {

@@ -132,6 +132,10 @@ main {
 	background-color: #ffe0b2;
 }
 
+.button:visited {
+	color: #310;
+}
+
 .end-button {
   background-color: #ff9800;
   border-color: #310;
