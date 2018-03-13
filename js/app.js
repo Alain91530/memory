@@ -142,22 +142,7 @@ function flipCard(card) {
     // If the card is the 2nd of a move we need to increase the moves number
     if ((flips++)%2) {
       moveScore.textContent = "Moves: "+(flips/2);
-      // Then we check if the stars score needs to be changed
-      switch (flips) {
-        case twoStars: {
-          stars[2].classList.replace('fa-star','fa-minus');
-          break;
-        }
-        case oneStar: {
-          stars[1].classList.replace('fa-star','fa-minus');
-          break;
-        }
-        // we can't Stop the game now: it might be the last matching pair
-        case maxFlips: {
-          stars[0].classList.replace('fa-star','fa-minus');
-          break;
-        }
-      };
+      displayStars();
       // Checking if it's a matching pair
       if (card.target.querySelector('h2').textContent==firstCard.querySelector('h2').textContent) {
         card.target.classList.add('matching');
@@ -288,7 +273,8 @@ function startGame(restore) {
 if ((localStorage.getItem('saved')=="true")&&(restore)) {
   restoreGame();
   moveScore.textContent = "Moves: "+Math.trunc(flips/2);
-  document.getElementById('game-paused').classList.remove('hide')
+  displayStars();
+  document.getElementById('game-paused').classList.remove('hide');
 }
 else {
   storeGame();
@@ -328,6 +314,11 @@ else {
 /*******************************************************************************
   Functions to be called for repetitive actions of the logic of the Game
 
+    displayStars():
+    Action: Change the diplay of stars according to the number of moves. The
+    function is called by flipCard at each move (each 2 flips) and when the game
+    is restored.
+
     endGame(win):
       Action: modifify the DOM to display the end of game modal popup.
       Stop the timer and put all cards front side up.
@@ -360,6 +351,31 @@ else {
       of the data.
 
 *******************************************************************************/
+
+/*******************************************************************************
+    Put stars display in accordance with moves number
+    *** 0 <= flips < twoStars
+    **- twoStars <= flips < oneStar
+    *-- oneStar <= flips < maxFlips
+    --- maxFlips = maxFlips
+*******************************************************************************/
+
+function displayStars() {
+    switch (flips) {
+      case twoStars: {
+        stars[2].classList.replace('fa-star','fa-minus');
+        break;
+      }
+      case oneStar: {
+        stars[1].classList.replace('fa-star','fa-minus');
+        break;
+      }
+      case maxFlips: {
+        stars[0].classList.replace('fa-star','fa-minus');
+        break;
+      }
+    };
+}
 
 /*******************************************************************************
     End a game
